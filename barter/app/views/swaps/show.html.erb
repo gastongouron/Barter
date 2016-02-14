@@ -8,13 +8,17 @@
   <% end %>
 </title>
 
-<h1><%= @swap.name %></h1>
-<p><%= @swap.description %></p>
-<p><%= @swap.location %></p>
+<header>
+  <h1><%= @swap.name %></h1>
 
- <%= link_to "Edit Swap", edit_swap_path(@swap) %>
-
-<%= link_to "Delete Swap",
-            swap_path(@swap),
-            method: :delete,
-            data: { confirm: "Are you sure you want to delete this swap?" }%>
+    <p><%= @swap.description %></p>
+    <p><%= @swap.location %></p>
+  <ul class="actions">
+    <li><%= link_to "Edit Swap", edit_swap_path(@swap),
+    class: "edit" %></li>
+    <li><%= link_to "Delete Swap", swap_path(@swap),
+     method: :delete,
+     data: { confirm: "Are you sure you want to delete this swap?" },
+     class: "delete" %></li>
+  </ul>
+</header>

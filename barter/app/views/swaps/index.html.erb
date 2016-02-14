@@ -1,8 +1,17 @@
-<h1>Swaps</h1>
-  <%= link_to "New Swap", new_swap_path %>
-        <div id="swaps">
-          <% @swaps.each do |swap| %>
-            <h2><%= link_to swap.name, swap %></h2>
-            <p><%= swap.description %></p>
+<header>
+  <h1>Swaps</h1>
+
+    <ul class="actions">
+      <li>
+        <%= link_to "New Swap", new_swap_path, class: "new" %>
+      </li>
+    </ul>
+
+</header>
+
+<div id="swaps">
+  <% @swaps.each do |swap| %>
+    <h2><%= link_to swap.name, swap %></h2>
+    <p><%= swap.description %></p>
   <% end %>
 </div>
