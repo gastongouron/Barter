@@ -1,2 +1,12 @@
+<% title(@swap.name, "Swaps") %>
+
+<title>
+  <% if content_for?(:title) %>
+    <%= yield(:title) %>
+  <% else %>
+    Ticketee
+  <% end %>
+</title>
+
 <h1><%= @swap.name %></h1>
 <p><%= @swap.description %></p>
