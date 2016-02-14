@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :swap do
-    name        "Example swap"
+    name        "Sublime Text 3"
     description "Example description"
     location    "Example location"
   end

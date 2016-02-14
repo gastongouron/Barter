@@ -23,19 +23,37 @@ class SwapsController < ApplicationController
     @swap = Swap.find(params[:id])
   end
 
-  def update
+  def edit
+    @swap = Swap.find(params[:id])
   end
+
+  def update
+    @swap = Swap.find(params[:id])
+    @swap.update(swap_params)
+    flash[:notice] = "Swap has been updated."
+    redirect_to @swap
+  end
+
+  def destroy
+    @swap = Swap.find(params[:id])
+    @swap.destroy
+    flash[:notice] = "Swap has been deleted."
+    redirect_to swaps_path
+  end
+
 
 private
 
   def swap_params
-    params.require(:swap).permit(:name,
-                                 :description,
-                                 :location,
-                                 :start,
-                                 :end,
-                                 :swapper_id,
-                                 :barter_id)
+    params.require(:swap).permit(
+      :name,
+      :description,
+      :location,
+      :start,
+      :end,
+      :swapper_id,
+      :barter_id
+    )
   end
 
 end

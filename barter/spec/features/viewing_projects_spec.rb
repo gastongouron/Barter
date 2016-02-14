@@ -3,7 +3,7 @@ require "rails_helper"
     scenario "with the swap details" do
       swap = FactoryGirl.create(:swap)
       visit "/"
-      click_link "Example swap"
+      click_link "Sublime Text 3"
     expect(page.current_url).to eq swap_url(swap)
   end
 end

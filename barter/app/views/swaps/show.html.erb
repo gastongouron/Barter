@@ -12,3 +12,9 @@
 <p><%= @swap.description %></p>
 <p><%= @swap.location %></p>
 
+ <%= link_to "Edit Swap", edit_swap_path(@swap) %>
+
+<%= link_to "Delete Swap",
+            swap_path(@swap),
+            method: :delete,
+            data: { confirm: "Are you sure you want to delete this swap?" }%>
