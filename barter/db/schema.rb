@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160214161200) do
+ActiveRecord::Schema.define(version: 20160214215809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "barts", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "swap_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "barts", ["swap_id"], name: "index_barts_on_swap_id", using: :btree
 
   create_table "swaps", force: :cascade do |t|
     t.string   "name"
@@ -28,4 +38,5 @@ ActiveRecord::Schema.define(version: 20160214161200) do
     t.datetime "updated_at",  null: false
   end
 
+  add_foreign_key "barts", "swaps"
 end
