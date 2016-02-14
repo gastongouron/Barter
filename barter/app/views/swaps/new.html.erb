@@ -1,0 +1,12 @@
+<h1>New Swap</h1>
+<%= form_for(@swap) do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+</p>
+  <p>
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+</p>
+  <%= f.submit %>
+<% end %>
