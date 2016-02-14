@@ -1,5 +1,7 @@
 class SwapsController < ApplicationController
 
+before_action :set_swap, only: [:show, :edit, :update, :destroy]
+
   def index
     @swaps = Swap.all
   end
@@ -20,27 +22,22 @@ class SwapsController < ApplicationController
   end
 
   def show
-    @swap = Swap.find(params[:id])
   end
 
   def edit
-    @swap = Swap.find(params[:id])
   end
 
   def update
-    @swap = Swap.find(params[:id])
     @swap.update(swap_params)
     flash[:notice] = "Swap has been updated."
     redirect_to @swap
   end
 
   def destroy
-    @swap = Swap.find(params[:id])
     @swap.destroy
     flash[:notice] = "Swap has been deleted."
     redirect_to swaps_path
   end
-
 
 private
 
@@ -55,5 +52,13 @@ private
       :barter_id
     )
   end
+
+  def set_swap
+    @swap = Swap.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+    flash[:alert] = "The swap you were looking for could not be found."
+    redirect_to swaps_path
+  end
+
 
 end
