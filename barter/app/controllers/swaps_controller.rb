@@ -10,10 +10,11 @@ class SwapsController < ApplicationController
   def create
     @swap = Swap.new(swap_params)
     if @swap.save
-      flash[:notice] = "Project has been created."
+      flash[:notice] = "Swap has been created."
       redirect_to @swap
     else
-    # nothing, yet
+      flash.now[:alert] = "Swap has not been created."
+      render "new"
     end
   end
 
@@ -21,10 +22,19 @@ class SwapsController < ApplicationController
     @swap = Swap.find(params[:id])
   end
 
+  def update
+  end
+
 private
 
   def swap_params
-    params.require(:swap).permit(:name, :description)
+    params.require(:swap).permit(:name,
+                                 :description,
+                                 :location,
+                                 :start,
+                                 :end,
+                                 :swapper_id,
+                                 :barter_id)
   end
 
 end
