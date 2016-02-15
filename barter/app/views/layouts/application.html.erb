@@ -31,8 +31,10 @@
       <ul class="nav navbar-nav">
         <li class="<%= "active" if current_page?("/") %>">
           <%= link_to "Home", root_path %>
-        </li>
+        </li class="<%= "active" if current_page?("/") %>">
+        <li>
           <%= link_to "Sign up", new_user_path %>
+        </li>
       </ul>
     </div>
   </div>
