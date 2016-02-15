@@ -5,9 +5,16 @@
   <header>
     <h2><%= @bart.name %></h2>
     <span id='author'>Created by <%= @bart.user.email %></span>
+
+    <% if @bart.user.id == current_user.id %>
     <%= link_to "Edit", [:edit, @swap, @bart] %>
     <%= link_to "Delete", [@swap, @bart], method: :delete, data: { confirm: "Are you sure you want to delete this offer?"} %>
+    <% end %>
+
+    <% if @swap.swapper_id == current_user.id %>
+    Custom selection for barter_id
+    <% end %>
+
 </header>
   <%= simple_format(@bart.description) %>
 </div>
-

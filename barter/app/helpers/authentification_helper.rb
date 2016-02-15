@@ -10,6 +10,9 @@ module AuthentificationHelper
   end
 end
 
-RSpec.configure do |c|
-  c.include AuthentificationHelper, type: :feature
-end
+
+# FOR TEST PURPOSES
+# Comment when live testing unless I find a solution
+# RSpec.configure do |c|
+#   c.include AuthentificationHelper, type: :feature
+# end
