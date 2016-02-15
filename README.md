@@ -73,3 +73,4 @@ Dehors/dedans
 Assis/debout
 Seul/groupe
 Physique/nonphysical
+Avec matériel/sans matériel
