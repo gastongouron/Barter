@@ -21,6 +21,19 @@ before_action :set_bart, only: [:show, :edit, :update, :destroy]
   def show
   end
 
+  def edit
+  end
+
+  def update
+    if @bart.update(bart_params)
+      flash[:notice] = "Bart has been updated."
+      redirect_to [@swap, @bart]
+    else
+      flash[:alert] = "Bart has not been updated."
+      render action: "edit"
+    end
+  end
+
 private
 
   def bart_params

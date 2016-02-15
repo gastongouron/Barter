@@ -19,9 +19,10 @@ ActiveRecord::Schema.define(version: 20160214215809) do
   create_table "barts", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
+    t.boolean  "chosen",      default: false
     t.integer  "swap_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "barts", ["swap_id"], name: "index_barts_on_swap_id", using: :btree

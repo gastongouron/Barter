@@ -4,6 +4,8 @@
   </header>
   <header>
     <h2><%= @bart.name %></h2>
+    <%= link_to "Edit Bart offer", [:edit, @swap, @bart] %>
 </header>
   <%= simple_format(@bart.description) %>
 </div>
+
