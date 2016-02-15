@@ -37,8 +37,9 @@ ActiveRecord::Schema.define(version: 20160215105148) do
     t.datetime "end"
     t.integer  "swapper_id"
     t.integer  "barter_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "swapper_name"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "users", force: :cascade do |t|

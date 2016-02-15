@@ -10,9 +10,8 @@
 
 <header>
   <h1><%= @swap.name %></h1>
-
-
-    <p><%= @swap.description %></p>
+  <p>Created by <b><%= @swap.swapper_name %></b></p>
+  <p><%= @swap.description %></p>
   <ul class="actions">
     <% if @swap.swapper_id == current_user.id %>
     <li><%= link_to "Edit Swap", edit_swap_path(@swap),
@@ -36,7 +35,7 @@
 <ul id="barts">
   <% @swap.barts.each do |bart| %>
     <li>
-      <%= link_to bart.name, [@swap, bart] %> -
+      <%= link_to bart.name, [@swap, bart] %>
       <span id="author">Created by <%= bart.user.email %></span>
 
     </li>
