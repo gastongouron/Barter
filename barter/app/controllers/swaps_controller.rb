@@ -23,6 +23,8 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
   end
 
   def show
+    # @swapcreator = User.find_by(id:@swap.swapper_id )
+    # @swapcreator_name = @swapcreator.username
   end
 
   def edit

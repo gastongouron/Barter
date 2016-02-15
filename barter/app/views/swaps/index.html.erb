@@ -11,7 +11,7 @@
 
 <div id="swaps">
   <% @swaps.each do |swap| %>
-    <h2><%= link_to swap.name, swap %> by
+    <h2><%= link_to swap.name, swap %> by <%= swap.swapper_id %>
 
     <p><%= swap.description %></p>
   <% end %>
