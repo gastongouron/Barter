@@ -4,8 +4,9 @@
   </header>
   <header>
     <h2><%= @bart.name %></h2>
-    <%= link_to "Edit Bart offer", [:edit, @swap, @bart] %>
-    <%= link_to "Delete Bart offer", [@swap, @bart], method: :delete, data: { confirm: "Are you sure you want to delete this offer?"} %>
+    <span id='author'>Created by <%= @bart.user.email %></span>
+    <%= link_to "Edit", [:edit, @swap, @bart] %>
+    <%= link_to "Delete", [@swap, @bart], method: :delete, data: { confirm: "Are you sure you want to delete this offer?"} %>
 </header>
   <%= simple_format(@bart.description) %>
 </div>

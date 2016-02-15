@@ -34,6 +34,7 @@
   <% @swap.barts.each do |bart| %>
     <li>
       #<%= bart.id %> -
+      <span id="author">Created by <%= bart.user.email %></span>
       <%= link_to bart.name, [@swap, bart] %>
     </li>
   <% end %>

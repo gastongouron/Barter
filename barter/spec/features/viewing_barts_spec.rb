@@ -3,11 +3,14 @@ require "rails_helper"
 RSpec.feature "Users can view barts" do
 
   before do
-
     sublime = FactoryGirl.create(:swap, name: "Sublime Text 3")
-    FactoryGirl.create(:bart, swap: sublime,
-      name: "Make it shiny!",
-      description: "Gradients! Starbursts! Oh my!")
+    user = FactoryGirl.create(:user)
+    bart = FactoryGirl.create(:bart,
+        swap: sublime,
+        name: "Make it shiny!",
+        description: "Gradients! Starbursts! Oh my!")
+    bart.update(user: user)
+
     ie = FactoryGirl.create(:swap, name: "Internet Explorer")
     FactoryGirl.create(:bart, swap: ie,
       name: "Standards compliance", description: "Isn't a joke.")
