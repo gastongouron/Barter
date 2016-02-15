@@ -34,6 +34,12 @@ before_action :set_bart, only: [:show, :edit, :update, :destroy]
     end
   end
 
+  def destroy
+    @bart.destroy
+    flash[:notice] = "Bart has been deleted."
+    redirect_to @swap
+  end
+
 private
 
   def bart_params
