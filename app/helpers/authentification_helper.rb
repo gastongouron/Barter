@@ -13,6 +13,17 @@ end
 
 # FOR TEST PURPOSES
 # Comment when live testing unless I find a solution
+
 # RSpec.configure do |c|
 #   c.include AuthentificationHelper, type: :feature
+# end
+
+# module AuthHelpers
+#   def sign_in(user)
+#     session[:user_id] = user.id
+#   end
+# end
+
+# RSpec.configure do |c|
+#   c.include AuthHelpers, type: :controller
 # end

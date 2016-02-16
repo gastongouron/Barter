@@ -1,5 +1,7 @@
 class SwapsController < ApplicationController
 
+before_action :authorize_admin!, except: [:index, :show]
+before_action :mustberich, except: [:index, :show]
 before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -20,6 +22,9 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
     end
 
     if @swap.save
+      p "----------------------------------"
+      current_user.timecoin -= 1
+      current_user.save
       flash[:notice] = "Swap has been created."
       redirect_to @swap
     else
@@ -67,5 +72,19 @@ private
     redirect_to swaps_path
   end
 
+   def authorize_admin!
+    require_signin!
+    unless current_user.admin?
+      flash[:alert] = "You must be an admin to do that."
+      redirect_to root_path
+    end
+  end
+
+   def mustberich
+    if current_user.timecoin < 1
+      flash[:alert] = "You must have a timecoin to do that."
+      redirect_to root_path
+    end
+  end
 
 end
