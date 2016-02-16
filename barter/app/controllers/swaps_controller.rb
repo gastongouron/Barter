@@ -52,8 +52,8 @@ private
       :location,
       :start,
       :end,
-      :swapper_id,
-      :barter_id
+      :barter_id,
+      :swapper_id
     )
   end
 
