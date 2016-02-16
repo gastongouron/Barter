@@ -1,7 +1,7 @@
 class SwapsController < ApplicationController
 
 before_action :authorize_admin!, except: [:index, :show]
-before_action :mustberich, except: [:index, :show]
+before_action :mustberich, except: [:index, :show, :update]
 before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -41,8 +41,19 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
   def update
     @swap.update(swap_params)
-    flash[:notice] = "Swap has been updated."
+
+    if current_user.timecoin > 1 && @swap.barter_id == nil
+      p "----------------------------------"
+      @barter = User.find_by(id:params["swap"]["barter_id"])
+      @barter.timecoin += 1
+      @barter.save
+      current_user.timecoin -= 1
+      current_user.save
+    else
+    flash.now[:alert] = "You need a timecoin to select a barter."
     redirect_to @swap
+    end
+
   end
 
   def destroy
