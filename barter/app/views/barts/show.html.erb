@@ -11,7 +11,7 @@
     <%= link_to "Delete", [@swap, @bart], method: :delete, data: { confirm: "Are you sure you want to delete this offer?"} %>
     <% #end %>
 
-    <% #if @swap.swapper_id == current_user.id %>
+    <% if @swap.swapper_id == current_user.id && @swap.barter_id == nil %>
     <ul>
       <li class="actions">
     <%= simple_form_for(@swap) do %>
@@ -20,7 +20,11 @@
     <% end %>
       </li>
     </ul>
-    <% #end %>
+    <% elsif @swap.swapper_id == current_user.id && @swap.barter_id != nil %>
+      <p>This swapper has already been chosen for this job</p>
+    <% else %>
+      <p>Only the Swap creator can accept this bart</p>
+    <% end %>
 
 
 </header>

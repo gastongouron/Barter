@@ -40,11 +40,19 @@
       <%= link_to bart.name, [@swap, bart] %>
       <span id="author">Created by <b><%= bart.user.name %></b> contact:<b><%= bart.user.email %></b></span>
 
+    <% if @swap.swapper_id == current_user.id && @swap.barter_id == nil %>
+
     <%= simple_form_for(@swap) do %>
     <%= hidden_field(:swap, :barter_id, :value => bart.user.id) %>
     <%= submit_tag("Swap with this barter", class: "select") %>
-    <br><br>
-  <% end %>
+    <% end %>
+
+    <% elsif @swap.swapper_id == current_user.id && @swap.barter_id != nil %>
+      <p>This swapper has already been chosen for this job</p>
+    <% else %>
+
+    <% end %>
+      <br><br>
     </li>
   <% end %>
 </ul>
