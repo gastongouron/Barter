@@ -6,14 +6,22 @@
     <h2><%= @bart.name %></h2>
     <span id='author'>Created by <%= @bart.user.email %></span>
 
-    <% if @bart.user.id == current_user.id %>
+    <% #if @bart.user.id == current_user.id %>
     <%= link_to "Edit", [:edit, @swap, @bart] %>
     <%= link_to "Delete", [@swap, @bart], method: :delete, data: { confirm: "Are you sure you want to delete this offer?"} %>
-    <% end %>
+    <% #end %>
 
-    <% if @swap.swapper_id == current_user.id %>
-    Select this user
+    <% #if @swap.swapper_id == current_user.id %>
+    <ul>
+      <li class="actions">
+    <%= simple_form_for(@swap) do %>
+    <%= hidden_field(:swap, :barter_id, :value => @bart.user.id) %>
+    <%= submit_tag("Swap with this barter", class: 'btn btn-warning') %>
     <% end %>
+      </li>
+    </ul>
+    <% #end %>
+
 
 </header>
   <%= simple_format(@bart.description) %>

@@ -13,14 +13,16 @@
   <p>Created by <b><%= @swap.swapper_name %></b></p>
   <p><%= @swap.description %></p>
   <ul class="actions">
-    <% if @swap.swapper_id == current_user.id %>
+
+    <% #if @swap.swapper_id == current_user.id %>
     <li><%= link_to "Edit Swap", edit_swap_path(@swap),
     class: "edit" %></li>
     <li><%= link_to "Delete Swap", swap_path(@swap),
      method: :delete,
      data: { confirm: "Are you sure you want to delete this swap?" },
      class: "delete" %></li>
-     <% end %>
+     <% #end %>
+
   </ul>
 </header>
 
@@ -38,13 +40,11 @@
       <%= link_to bart.name, [@swap, bart] %>
       <span id="author">Created by <b><%= bart.user.name %></b> contact:<b><%= bart.user.email %></b></span>
 
-  <%= simple_form_for(@swap) do %>
+    <%= simple_form_for(@swap) do %>
     <%= hidden_field(:swap, :barter_id, :value => bart.user.id) %>
-    <%= submit_tag("Search") %>
+    <%= submit_tag("Swap with this barter", class: "select") %>
+    <br><br>
   <% end %>
-
-    <%= link_to "Accept help", {:controller => "swaps", :action => "update", :barter_id => bart.user.id }%>
-
     </li>
   <% end %>
 </ul>

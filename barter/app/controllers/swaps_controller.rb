@@ -12,9 +12,12 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
   def create
     @swap = Swap.new(swap_params)
-    @swap.swapper_id = current_user.id
-    @swapcreator = User.find_by(id: @swap.swapper_id)
-    @swap.swapper_name = @swapcreator.name
+
+    if current_user
+      @swap.swapper_id = current_user.id
+      @swapcreator = User.find_by(id: @swap.swapper_id)
+      @swap.swapper_name = @swapcreator.name
+    end
 
     if @swap.save
       flash[:notice] = "Swap has been created."

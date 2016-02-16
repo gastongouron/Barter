@@ -35,7 +35,7 @@ ul.actions {
   @extend .list-inline;
 }
 
-a.new, a.edit, a.delete {
+a.new, a.edit, a.delete, a.select {
   @extend .btn;
 
   &:before {
@@ -46,6 +46,20 @@ a.new, a.edit, a.delete {
 
 a.new {
   @extend .btn-success;
+
+  &:before {
+    @extend .fa-plus;
+  }
+}
+
+.select {
+  @extend .btn;
+  @extend .btn-warning;
+  padding-right: 0.5em;
+
+  &:before {
+    font-family: "FontAwesome";
+  }
 
   &:before {
     @extend .fa-plus;
