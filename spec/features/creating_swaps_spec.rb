@@ -3,6 +3,7 @@ require "rails_helper"
 RSpec.feature "Users can create new swaps" do
 
   before do
+  sign_in_as!(FactoryGirl.create(:admin_user))
   visit "/"
     click_link "New Swap"
   end

@@ -12,6 +12,7 @@
 # end
 
 require 'spec_helper'
+
 describe SwapsController do
   let(:user) { FactoryGirl.create(:user) }
   context "standard users" do
