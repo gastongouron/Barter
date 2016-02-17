@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+  get 'users/index'
+  end
+
   get 'users/new'
 
   get 'users/create'
@@ -7,6 +11,10 @@ Rails.application.routes.draw do
   get 'users/show'
 
   get "/signin", to: "sessions#new"
+
+  namespace :admin do
+    resources :users
+  end
 
   post "/signin", to: "sessions#create"
 

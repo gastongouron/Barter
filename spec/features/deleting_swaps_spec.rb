@@ -1,6 +1,6 @@
 require "rails_helper"
   RSpec.feature "Users can delete swaps" do
-before do
+  before do
     sign_in_as!(FactoryGirl.create(:admin_user))
   end
     scenario "successfully" do
