@@ -41,6 +41,11 @@
 
           <%= link_to current_user.name, user_path(id: current_user.id) %>
         </li>
+        <li>
+        <% admins_only do %>
+        <%= link_to "Admin", admin_root_path %>
+        <% end %>
+        </li>
         <% end %>
 
       </ul>

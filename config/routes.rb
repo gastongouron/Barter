@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/signin", to: "sessions#new"
 
   namespace :admin do
+    root :to => "base#index"
     resources :users
   end
 
