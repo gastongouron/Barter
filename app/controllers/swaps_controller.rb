@@ -5,7 +5,7 @@ before_action :authorize_admin!, except: [:index, :show]
 before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
   def index
-    @swaps = Swap.all
+    @swaps = Swap.all.order('created_at DESC')
   end
 
   def new

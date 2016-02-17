@@ -29,7 +29,7 @@ RSpec.feature "Users can create new barts" do
     click_button "Create Bart"
     expect(page).to have_content "Bart has been created."
     within "#author" do
-      expect(page).to have_content("Created by Paul contact:sample@example.com")
+      expect(page).to have_content("Created by #{@email}")
     end
   end
   scenario "when providing invalid attributes" do
