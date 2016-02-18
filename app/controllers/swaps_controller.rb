@@ -1,7 +1,7 @@
 class SwapsController < ApplicationController
 
-before_action :authorize_admin!, except: [:index, :show]
-#before_action :mustberich, except: [:index, :show, :update]
+#before_action :authorize_admin!, except: [:index, :show]
+before_action :authorize_rich!, except: [:index, :show, :update]
 before_action :require_signin!, only: [:show]
 before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
@@ -41,18 +41,39 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
   def update
     @swap.update(swap_params)
-    flash[:notice] = "Swap has been updated."
-    if current_user.timecoin > 1 && @swap.barter_id == nil
-      p "----------------------------------"
+
       @barter = User.find_by(id:params["swap"]["barter_id"])
-      @barter.timecoin += 1
+      #@barter.timecoin += 1
       @barter.save
-      current_user.timecoin -= 1
-      current_user.save
-    else
-    flash.now[:alert] = "You need a timecoin to select a barter."
-    redirect_to @swap
-    end
+
+      @pick = Bart.find_by(owner:params["swap"]["owner"])
+      p "---------------------------------------------------"
+      p @pick
+
+      @swap.barts.each do |bart|
+        bart.chosen = false
+        bart.save
+      end
+
+      if @pick.chosen == false
+      @barter.timecoin += 1
+      @pick.chosen = true
+      @swap.bart_id = @pick.id
+      @pick.save
+      @swap.save
+      flash.now[:alert] = "You selected a barter for this swap."
+
+      elsif @pick.chosen == true
+      @pick.chosen = false
+      @swap.bart_id = nil
+      @swap.barter_id = nil
+      @pick.save
+      @swap.save
+      flash.now[:alert] = "You unselected this Barter."
+      end
+      p "---------------------------------------------------"
+      p @pick
+      redirect_to [@swap, @bart]
 
   end
 
@@ -72,7 +93,8 @@ private
       :start,
       :end,
       :barter_id,
-      :swapper_id
+      :swapper_id,
+      :bart_id
     )
   end
 
@@ -93,5 +115,11 @@ private
       redirect_to root_path
     end
   end
+
+  # def belongstoswap(swap)
+  #   swap.barts.each do |bart|
+  #     bart.chosen.any? {|chosen| chosen == true }
+  #   end
+  # end
 
 end

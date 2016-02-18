@@ -37,9 +37,9 @@ end
 
 # FOR TEST PURPOSES
 # Comment when live testing unless I find a solution
-RSpec.configure do |c|
-  c.include AuthorizationHelpers
-  c.include AuthenticationHelper, type: :feature
-  c.include AuthHelpers, type: :controller
-  c.include CapybaraHelpers, :type => :feature
-end
+# RSpec.configure do |c|
+#   c.include AuthorizationHelpers
+#   c.include AuthenticationHelper, type: :feature
+#   c.include AuthHelpers, type: :controller
+#   c.include CapybaraHelpers, :type => :feature
+# end

@@ -21,9 +21,9 @@ Rails.application.routes.draw do
 
   root "swaps#index"
 
-# put "/swaps/:id" => "swaps#update"
   put "/swaps/:id" => "swaps#barter"
 
+  delete "/signout", to: "sessions#destroy", as: "signout"
 
   resources :swaps do
     resources :barts

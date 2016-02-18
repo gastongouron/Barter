@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20160218090016) do
 
   create_table "barts", force: :cascade do |t|
     t.string   "name"
+    t.integer  "owner"
     t.text     "description"
     t.boolean  "chosen",      default: false
     t.integer  "swap_id"
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160218090016) do
     t.datetime "end"
     t.integer  "swapper_id"
     t.integer  "barter_id"
+    t.integer  "bart_id"
     t.string   "swapper_name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
