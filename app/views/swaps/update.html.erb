@@ -11,8 +11,7 @@
 <header>
   <h1><%= @swap.name %></h1>
   <p>Created by <b><%= @swap.swapper_name %></b></p>
-  <p>Created at <b><%= @swap.created_at %></b></p>
-  <p>Description <b><%= @swap.description %></b></p>
+  <p><%= @swap.description %></p>
   <ul class="actions">
   <% if current_user.id == @swap.swapper_id %>
     <li><%= link_to "Edit Swap", edit_swap_path(@swap),
@@ -33,14 +32,15 @@
 </header>
 
 
-<div id="barts">
-
-  <% @swap.barts.reverse.each do |bart| %>
-
-
+<ul id="barts">
+  <% @swap.barts.each do |bart| %>
+    <li>
+      <% if bart.chosen %>
+      <h1>
       <%= link_to bart.name, [@swap, bart] %>
       <p><%= bart.description %></p>
-
+      </h1>
+      <% end %>
 
       <span id="author">Created by <b><%= bart.user.email %></b></span>
 
@@ -48,6 +48,7 @@
         <%= simple_form_for(@swap) do %>
           <%= hidden_field(:swap, :barter_id, :value => bart.user.id) %>
           <%= hidden_field(:swap, :owner, :value => bart.user.id) %>
+          <%= hidden_field(:swap, :chosen, :value => bart.chosen) %>
           <%= submit_tag("Swap with this barter", class: "select pull-right") %>
         <% end %>
 
@@ -55,11 +56,12 @@
         <%= simple_form_for(@swap) do %>
           <%= hidden_field(:swap, :barter_id, :value => bart.user.id) %>
           <%= hidden_field(:swap, :owner, :value => bart.user.id) %>
+          <%= hidden_field(:swap, :chosen, :value => bart.chosen) %>
           <%= submit_tag("Unpick", class: "select pull-right") %>
         <% end %>
       <% end %>
 
       <br><br>
-
+    </li>
   <% end %>
-</div>
+</ul>

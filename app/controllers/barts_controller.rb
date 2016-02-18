@@ -11,6 +11,7 @@ before_action :require_signin!, except: [:show, :index]
 
   def create
     @bart = @swap.barts.build(bart_params)
+    @bart.owner = current_user.id
     @bart.user = current_user
     if @bart.save
       flash[:notice] = "Bart has been created."
@@ -46,7 +47,7 @@ before_action :require_signin!, except: [:show, :index]
 private
 
   def bart_params
-    params.require(:bart).permit(:name, :description)
+    params.require(:bart).permit(:name, :description, :owner)
   end
 
   def set_bart

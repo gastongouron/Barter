@@ -35,7 +35,7 @@ ul.actions {
   @extend .list-inline;
 }
 
-a.new, a.edit, a.delete, a.select {
+a.new, a.edit, a.delete {
   @extend .btn;
 
   &:before {
@@ -56,6 +56,11 @@ a.new {
   @extend .btn;
   @extend .btn-warning;
   padding-right: 0.5em;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
 
   &:before {
     font-family: "FontAwesome";
@@ -91,7 +96,7 @@ a.delete {
 }
 
 form {
-  max-width: 500px;
+  max-width: 100%;
 }
 
 body {

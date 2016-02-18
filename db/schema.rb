@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216093647) do
+ActiveRecord::Schema.define(version: 20160218090016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "barts", force: :cascade do |t|
     t.string   "name"
+    t.integer  "owner"
     t.text     "description"
     t.boolean  "chosen",      default: false
     t.integer  "swap_id"
@@ -29,6 +30,15 @@ ActiveRecord::Schema.define(version: 20160216093647) do
   add_index "barts", ["swap_id"], name: "index_barts_on_swap_id", using: :btree
   add_index "barts", ["user_id"], name: "index_barts_on_user_id", using: :btree
 
+  create_table "permissions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "thing_id"
+    t.string   "thing_type"
+    t.string   "action"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "swaps", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -37,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160216093647) do
     t.datetime "end"
     t.integer  "swapper_id"
     t.integer  "barter_id"
+    t.integer  "bart_id"
     t.string   "swapper_name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -49,6 +60,7 @@ ActiveRecord::Schema.define(version: 20160216093647) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.boolean  "admin",           default: false
+    t.integer  "timecoin",        default: 1
   end
 
   add_foreign_key "barts", "swaps"

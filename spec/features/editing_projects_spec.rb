@@ -1,8 +1,9 @@
 require "rails_helper"
 
-RSpec.feature "Users can edit existing swaps" do
+RSpec.feature "Admin can edit existing swaps" do
   scenario "with valid attributes" do
     FactoryGirl.create(:swap, name: "Sublime Text 3")
+    sign_in_as!(FactoryGirl.create(:admin_user))
     visit "/"
     click_link "Sublime Text 3"
     click_link "Edit Swap"
