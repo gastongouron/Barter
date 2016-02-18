@@ -1,9 +1,12 @@
 class SwapsController < ApplicationController
 
+#before_action :authorize_admin!, except: [:index, :show]
+before_action :authorize_rich!, except: [:index, :show, :update]
+before_action :require_signin!, only: [:show]
 before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
   def index
-    @swaps = Swap.all
+    @swaps = Swap.all.order('created_at DESC')
   end
 
   def new
@@ -20,6 +23,8 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
     end
 
     if @swap.save
+      current_user.timecoin -= 1
+      current_user.save
       flash[:notice] = "Swap has been created."
       redirect_to @swap
     else
@@ -36,8 +41,40 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
   def update
     @swap.update(swap_params)
-    flash[:notice] = "Swap has been updated."
-    redirect_to @swap
+
+      @barter = User.find_by(id:params["swap"]["barter_id"])
+      #@barter.timecoin += 1
+      @barter.save
+
+      @pick = Bart.find_by(owner:params["swap"]["owner"])
+      p "---------------------------------------------------"
+      p @pick
+
+      @swap.barts.each do |bart|
+        bart.chosen = false
+        bart.save
+      end
+
+      if @pick.chosen == false
+      @barter.timecoin += 1
+      @pick.chosen = true
+      @swap.bart_id = @pick.id
+      @pick.save
+      @swap.save
+      flash.now[:alert] = "You selected a barter for this swap."
+
+      elsif @pick.chosen == true
+      @pick.chosen = false
+      @swap.bart_id = nil
+      @swap.barter_id = nil
+      @pick.save
+      @swap.save
+      flash.now[:alert] = "You unselected this Barter."
+      end
+      p "---------------------------------------------------"
+      p @pick
+      redirect_to [@swap, @bart]
+
   end
 
   def destroy
@@ -56,16 +93,33 @@ private
       :start,
       :end,
       :barter_id,
-      :swapper_id
+      :swapper_id,
+      :bart_id
     )
   end
 
   def set_swap
-    @swap = Swap.find(params[:id])
+    @swap = if current_user.admin? || current_user
+      Swap.find(params[:id])
+    else
+      Swap.viewable_by(current_user).find(params[:id])
+    end
     rescue ActiveRecord::RecordNotFound
     flash[:alert] = "The swap you were looking for could not be found."
     redirect_to swaps_path
   end
 
+  def mustberich
+    if current_user.timecoin < 1
+      flash[:alert] = "You must have a timecoin to do that."
+      redirect_to root_path
+    end
+  end
+
+  # def belongstoswap(swap)
+  #   swap.barts.each do |bart|
+  #     bart.chosen.any? {|chosen| chosen == true }
+  #   end
+  # end
 
 end

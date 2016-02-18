@@ -1,25 +1,19 @@
- <% if current_user %>
 <header>
   <h1>Swaps</h1>
     <ul class="actions">
       <li>
+        <% if current_user %>
         <%= link_to "New Swap", new_swap_path, class: "new" %>
+        <% end %>
       </li>
     </ul>
 </header>
 
-    <% else %>
-        Sign up / sign in to go further
-    <% end %>
-
- <% if current_user %>
 <div id="swaps">
   <% @swaps.each do |swap| %>
-    <h2>
-      <%= link_to swap.name, swap %>
-     created by <b><%= swap.swapper_name %></b>
-     </h2>
-    <p><%= swap.description %></p>
+    <p><h2><%= link_to swap.name, swap %> created by <b><%= swap.swapper_name %></b></h2></p>
+    <p><b>created</b> <%= swap.created_at %><br>
+    <b>description</b> <%= swap.description %></p>
+    <hr>
   <% end %>
 </div>
-<% end %>

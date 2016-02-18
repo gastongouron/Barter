@@ -8,6 +8,7 @@ class CreateSwaps < ActiveRecord::Migration
       t.datetime  :end
       t.integer   :swapper_id
       t.integer   :barter_id
+      t.integer   :bart_id
       t.string    :swapper_name
 
       t.timestamps null: false

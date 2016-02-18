@@ -3,25 +3,33 @@ require "rails_helper"
 RSpec.feature "Users can create new barts" do
 
   before do
-    swap = FactoryGirl.create(:swap)
+
+    swap = FactoryGirl.create(:swap, name: "Internet Explorer")
     user = FactoryGirl.create(:user)
+    define_permission!(user, "view", swap)
+    @email = user.email
+    sign_in_as!(user)
+
     visit '/'
     click_link swap.name
     click_link "New Bart"
-    message = "You need to sign in or sign up before continuing."
-    expect(page).to have_content(message)
-    fill_in "Name", with: user.name
-    fill_in "Password", with: user.password
-    click_button "Sign in"
-    click_link swap.name
-    click_link "New Bart"
+
+    # message = "You need to sign in or sign up before continuing."
+    # expect(page).to have_content(message)
+    # fill_in "Name", with: user.name
+    # fill_in "Password", with: user.password
+    # click_button "Sign in"
+    # click_link swap.name
+    # click_link "New Bart"
+
   end
 
-  before do
-    swap = FactoryGirl.create(:swap, name: "Internet Explorer")
-    visit swap_path(swap)
-    click_link "New Bart"
-  end
+  # before do
+  #   define_permission!(user, "view", swap)
+  #   swap = FactoryGirl.create(:swap, name: "Internet Explorer")
+  #   visit swap_path(swap)
+  #   click_link "New Bart"
+  # end
 
   scenario "with valid attributes" do
     fill_in "Name", with: "Non-standards compliance"
@@ -29,7 +37,7 @@ RSpec.feature "Users can create new barts" do
     click_button "Create Bart"
     expect(page).to have_content "Bart has been created."
     within "#author" do
-      expect(page).to have_content("Created by Paul contact:sample@example.com")
+      expect(page).to have_content("Created by #{@email}")
     end
   end
   scenario "when providing invalid attributes" do
@@ -44,5 +52,5 @@ RSpec.feature "Users can create new barts" do
     click_button "Create Bart"
   expect(page).to have_content "Bart has not been created."
   expect(page).to have_content "Description is too short"
-end
+  end
 end

@@ -4,6 +4,7 @@ RSpec.feature "Users can view barts" do
 
   before do
     sublime = FactoryGirl.create(:swap, name: "Sublime Text 3")
+
     user = FactoryGirl.create(:user)
     bart = FactoryGirl.create(:bart,
         swap: sublime,
@@ -12,8 +13,10 @@ RSpec.feature "Users can view barts" do
     bart.update(user: user)
 
     ie = FactoryGirl.create(:swap, name: "Internet Explorer")
+    define_permission!(user, "view", ie)
     FactoryGirl.create(:bart, swap: ie,
       name: "Standards compliance", description: "Isn't a joke.")
+    sign_in_as!(user)
     visit "/" end
 
     scenario "for a given swap" do

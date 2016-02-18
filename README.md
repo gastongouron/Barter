@@ -8,7 +8,6 @@ A service must take less than one hour to be executed.
 A time coin is a virtual money equivalent to 1 hour of the real time
 Every service is worth 1 time-coin.
 
-
 Case study:
 User1 -> Have one time-coin -> Can ask for a service
 User2 -> Answer to user1 to execute the service in order to gain a time-coin
@@ -58,7 +57,7 @@ We should define job categories/subcategories in order to have clean posts and a
 This will help us for the filters as well, a good structure of the content is very important. I can work on this subject.
 exemple:
 Catégorie: Petits bricolages éléctriques
-  Job: Changer les ampoules dans la maison
+job: Changer les ampoules dans la maison
 
 => we can then add some scoring for the  jobs for example taking out the dog will demand 50% physical effort and helping move big staff will ask 70% physical effort.
 other job characteristics should be outside/inside and many funny stuff like that.
@@ -69,8 +68,28 @@ An user can rate user for the quality of service
 An user MUST select 'categories' when creating the swap
 An user can filter by category
 
+Tags/filtering/creating a service with n tags/categories:
 Dehors/dedans
 Assis/debout
 Seul/groupe
 Physique/nonphysical
 Avec matériel/sans matériel
+
+Todo:
+-> Admins users / superusers
+-> Timer for Swaps
+-> User profiles
+-> extend DB fields / Add migrations
+-> More TDD for extra features:
+    -> User have timecoins
+    -> User loose timecoins when creating a service
+    -> User gain timecoins when executing a service
+-> Cleaning methods in swaps#controller for havemoney? et getrich?
+-> Hiding link for routes such as deletes/new/create
+-> Think about a notation system:
+    -> An user can 'star' an user that gave him a service to say the quality of the service
+    -> An user can 'star' an user that commanditate a service to say the quality of the contact with the swapper
+
+-> more forms validations for contents on service creation/bart creations
+-> Implement simpleforms for user login/signup
+-> (more to come)...
