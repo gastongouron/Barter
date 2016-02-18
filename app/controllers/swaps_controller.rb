@@ -2,6 +2,7 @@ class SwapsController < ApplicationController
 
 before_action :authorize_admin!, except: [:index, :show]
 #before_action :mustberich, except: [:index, :show, :update]
+before_action :require_signin!, only: [:show]
 before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -76,7 +77,11 @@ private
   end
 
   def set_swap
-    @swap = Swap.find(params[:id])
+    @swap = if current_user.admin? || current_user
+      Swap.find(params[:id])
+    else
+      Swap.viewable_by(current_user).find(params[:id])
+    end
     rescue ActiveRecord::RecordNotFound
     flash[:alert] = "The swap you were looking for could not be found."
     redirect_to swaps_path

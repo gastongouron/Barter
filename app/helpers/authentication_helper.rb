@@ -26,9 +26,19 @@ module CapybaraHelpers
   end
 end
 
+module AuthorizationHelpers
+  def define_permission!(user, action, thing)
+    Permission.create!(user: user,
+                       action: action,
+                       thing: thing)
+  end
+end
+
+
 # FOR TEST PURPOSES
 # Comment when live testing unless I find a solution
 RSpec.configure do |c|
+  c.include AuthorizationHelpers
   c.include AuthenticationHelper, type: :feature
   c.include AuthHelpers, type: :controller
   c.include CapybaraHelpers, :type => :feature

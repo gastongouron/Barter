@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   def authorize_admin!
     require_signin!
-    unless current_user.admin?
+    unless current_user.admin? || current_user.timecoin >= 1
       flash[:alert] = "You must be an admin to do that."
       redirect_to root_path
     end

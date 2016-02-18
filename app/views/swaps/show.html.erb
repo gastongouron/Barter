@@ -36,10 +36,10 @@
   <% @swap.barts.each do |bart| %>
     <li>
       <%= link_to bart.name, [@swap, bart] %>
-      <span id="author">Created by <b><%= bart.user.name %></b> contact:<b><%= bart.user.email %></b></span>
+      <span id="author">Created by <b><%= bart.user.email %></b></span>
       <%= simple_form_for(@swap) do %>
       <%= hidden_field(:swap, :barter_id, :value => bart.user.id) %>
-      <%= submit_tag("Swap with this barter", class: "select") %>
+      <%= submit_tag("Swap with this barter", class: "select pull-right") %>
       <% end %>
       <br><br>
     </li>

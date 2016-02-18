@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216132854) do
+ActiveRecord::Schema.define(version: 20160218090016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 20160216132854) do
 
   add_index "barts", ["swap_id"], name: "index_barts_on_swap_id", using: :btree
   add_index "barts", ["user_id"], name: "index_barts_on_user_id", using: :btree
+
+  create_table "permissions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "thing_id"
+    t.string   "thing_type"
+    t.string   "action"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "swaps", force: :cascade do |t|
     t.string   "name"
