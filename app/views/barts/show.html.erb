@@ -15,9 +15,19 @@
 </div>
 <hr>
 
-     <span class="actions">
-    <%= simple_form_for(@swap) do %>
-    <%= hidden_field(:swap, :barter_id, :value => @bart.user.id) %>
-    <%= submit_tag("Swap with this barter", class: 'select') %>
-    <% end %><br>
-      </span>
+  <span id="author">Created by <b><%= @bart.user.email %></b></span>
+
+      <% if current_user.id == @swap.swapper_id && @bart.chosen == false %>
+        <%= simple_form_for(@swap) do %>
+          <%= hidden_field(:swap, :@barter_id, :value => @bart.user.id) %>
+          <%= hidden_field(:swap, :owner, :value => @bart.user.id) %>
+          <%= submit_tag("Swap with this @barter", class: "select pull-right") %>
+        <% end %>
+
+      <% elsif current_user.id == @swap.swapper_id && @bart.chosen == true %>
+        <%= simple_form_for(@swap) do %>
+          <%= hidden_field(:swap, :@barter_id, :value => @bart.user.id) %>
+          <%= hidden_field(:swap, :owner, :value => @bart.user.id) %>
+          <%= submit_tag("Unpick", class: "select pull-right") %>
+        <% end %>
+      <% end %>

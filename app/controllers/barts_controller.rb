@@ -1,6 +1,5 @@
 class BartsController < ApplicationController
 
-
 before_action :set_swap
 before_action :set_bart, only: [:show, :edit, :update, :destroy]
 before_action :require_signin!, except: [:show, :index]

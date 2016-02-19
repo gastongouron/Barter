@@ -20,6 +20,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @swaps = Swap.where(swapper_id:params[:id])
+    p @barts = Bart.where(owner:current_user.id)
   end
 
   def update
