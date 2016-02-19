@@ -7,11 +7,33 @@
     Barter
   <% end %>
 </title>
+</div>
+<div style='width: 100%'>
+  <div id="map" style='width: 100%; height: 300px;'></div>
+</div>
+<div class="container">
+<script>
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {maxZoom: 18, disableDefaultUI: true}, internal: {id: 'map'}}, function(){
+  markers = handler.addMarkers([
+    {
+      "lat": <%= @lat %>,
+      "lng": <%= @lng %>,
+    }
+  ]);
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+});
+</script>
 
 <header>
   <h1><%= @swap.name %></h1>
   <p>Created by <b><%= @swap.swapper_name %></b></p>
-  <p><%= @swap.description %></p>
+  <p>Created at <b><%= @swap.created_at %></b></p>
+  <p>Description <b><%= @swap.description %></b></p>
+  <p>Location <b><%= @swap.location %></b></p>
+  <p>Start <b><%= @swap.start %></b></p>
+
   <ul class="actions">
   <% if current_user.id == @swap.swapper_id %>
     <li><%= link_to "Edit Swap", edit_swap_path(@swap),
@@ -27,20 +49,21 @@
 <header>
   <h2>Barts</h2>
   <ul class="actions">
+    <% if current_user.id != @swap.swapper_id %>
     <li><%= link_to "New Bart", new_swap_bart_path(@swap), class: "new" %></li>
+    <% end %>
   </ul>
 </header>
 
 
-<ul id="barts">
-  <% @swap.barts.each do |bart| %>
-    <li>
-      <% if bart.chosen %>
-      <h1>
+<div id="barts">
+
+  <% @swap.barts.reverse.each do |bart| %>
+
+
       <%= link_to bart.name, [@swap, bart] %>
       <p><%= bart.description %></p>
-      </h1>
-      <% end %>
+
 
       <span id="author">Created by <b><%= bart.user.email %></b></span>
 
@@ -48,7 +71,6 @@
         <%= simple_form_for(@swap) do %>
           <%= hidden_field(:swap, :barter_id, :value => bart.user.id) %>
           <%= hidden_field(:swap, :owner, :value => bart.user.id) %>
-          <%= hidden_field(:swap, :chosen, :value => bart.chosen) %>
           <%= submit_tag("Swap with this barter", class: "select pull-right") %>
         <% end %>
 
@@ -56,12 +78,11 @@
         <%= simple_form_for(@swap) do %>
           <%= hidden_field(:swap, :barter_id, :value => bart.user.id) %>
           <%= hidden_field(:swap, :owner, :value => bart.user.id) %>
-          <%= hidden_field(:swap, :chosen, :value => bart.chosen) %>
           <%= submit_tag("Unpick", class: "select pull-right") %>
         <% end %>
       <% end %>
 
       <br><br>
-    </li>
+
   <% end %>
-</ul>
+</div>

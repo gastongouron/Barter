@@ -26,6 +26,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+#maps
+gem 'gmaps4rails'
+gem 'underscore-rails'
+
+#geokit
+gem 'geocoder'
+gem 'geokit-rails'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
