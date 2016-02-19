@@ -35,10 +35,8 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
   end
 
   def show
-      p @swap.location
-      p a = Geocoder.search(@swap.location)
-      p ll = a[0].data["geometry"]["location"]
-      p "-----------------------------------------"
+      a = Geocoder.search(@swap.location)
+      ll = a[0].data["geometry"]["location"]
       @lat = ll['lat']
       @lng = ll['lng']
   end
@@ -48,7 +46,10 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
   def update
     @swap.update(swap_params)
-
+    a = Geocoder.search(@swap.location)
+    ll = a[0].data["geometry"]["location"]
+    @lat = ll['lat']
+    @lng = ll['lng']
 
       @pick = Bart.find_by(owner:params["swap"]["owner"])
       @barter = User.find_by(id:params["swap"]["barter_id"])
@@ -81,6 +82,7 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
       p @pick
       redirect_to [@swap, @bart]
       end
+
   end
 
   def destroy
