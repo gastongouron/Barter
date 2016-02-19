@@ -1,5 +1,7 @@
 class Swap < ActiveRecord::Base
 
+  acts_as_mappable
+
   has_many  :barts, dependent: :delete_all
   has_many  :permissions, as: :thing
 

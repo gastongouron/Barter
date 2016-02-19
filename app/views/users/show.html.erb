@@ -13,16 +13,13 @@
 
   <h3><%= swap.name %></h3>
 
-
   <% unless swap.barts.empty? %>
 
     <% swap.barts.each do |bart| %>
-
       <% if bart.chosen %>
       <h5>Chosen barts for this swap </h5>
       <p><%= bart.name %></p>
       <% end %>
-
     <% end %>
 
     <h5>Current barts for this swap </h5>
@@ -34,12 +31,17 @@
     <p> No currents barts for this swap</p>
   <% end %>
 
-
 <% end %>
 </div>
+
 <div class="col-md-6">
+
+  <h1>Chosen barts</h1>
+  <% @barts.each do |bart| %>
+    <p><%= bart.name if bart.chosen %></p>
+  <% end %>
+
   <h1>Current barts</h1>
-  <h3>
 
   <% @barts.each do |bart| %>
 
