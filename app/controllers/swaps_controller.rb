@@ -1,7 +1,7 @@
 class SwapsController < ApplicationController
 
 #before_action :authorize_admin!, except: [:index, :show]
-before_action :authorize_rich!, except: [:index, :show, :update]
+#before_action :authorize_rich!, except: [:index, :show, :update]
 before_action :require_signin!, only: [:show]
 before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
@@ -42,13 +42,11 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
   def update
     @swap.update(swap_params)
 
-      @barter = User.find_by(id:params["swap"]["barter_id"])
-      #@barter.timecoin += 1
-      @barter.save
 
       @pick = Bart.find_by(owner:params["swap"]["owner"])
-      p "---------------------------------------------------"
-      p @pick
+      @barter = User.find_by(id:params["swap"]["barter_id"])
+
+      @barter.save if @barter
 
       @swap.barts.each do |bart|
         bart.chosen = false
@@ -56,7 +54,7 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
       end
 
       if @pick.chosen == false
-      @barter.timecoin += 1
+      #@barter.timecoin += 1
       @pick.chosen = true
       @swap.bart_id = @pick.id
       @pick.save

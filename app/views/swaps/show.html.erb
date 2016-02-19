@@ -28,7 +28,9 @@
 <header>
   <h2>Barts</h2>
   <ul class="actions">
+    <% if current_user.id != @swap.swapper_id %>
     <li><%= link_to "New Bart", new_swap_bart_path(@swap), class: "new" %></li>
+    <% end %>
   </ul>
 </header>
 
