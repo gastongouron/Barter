@@ -18,7 +18,7 @@ handler.buildMap({ provider: {maxZoom: 18, disableDefaultUI: true}, internal: {i
   markers = handler.addMarkers([
     {
       "lat": <%= @lat %>,
-      "lng": <%= @lng %>,
+      "lng": <%= @lng %>
     }
   ]);
   handler.bounds.extendWith(markers);
