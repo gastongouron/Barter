@@ -35,7 +35,13 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
   def show
     p "--------------------------------"
-    a = Geocoder.search(@swap.location)
+     a = Geocoder.search(@swap.location)
+    ll = a[0].data["geometry"]["location"]
+    @lat = ll['lat']
+    @lng = ll['lng']
+    @time = @swap.start
+    @timenow = DateTime.now
+    @cooldown = @time - @timenow
   end
 
   def edit

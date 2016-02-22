@@ -2,7 +2,7 @@
   <h1>Swaps</h1>
     <ul class="actions">
       <li>
-        <% if current_user %>
+        <% if current_user && current_user.timecoin >= 1 %>
         <%= link_to "New Swap", new_swap_path, class: "new" %>
         <% end %>
       </li>

@@ -1,2 +1,7 @@
+<% if current_user.timecoin >= 1 %>
 <header><h1>New Swap</h1></header>
 <%= render "form", swap: @swap %>
+<% else %>
+<header><h3>Sorry! You need a timecoin to create a new swap</h3></header>
+<p>To obtain a timecoin, you have to help another person by giving one hour of your time. <br>Then, you'll be credited a timecoin allowing you to create a new swap.<br><a href="/swaps">See current swaps</a></p>
+<% end %>

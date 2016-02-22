@@ -28,7 +28,7 @@ handler.buildMap({ provider: {maxZoom: 18, disableDefaultUI: true}, internal: {i
 
 <header>
   <span class="h1">
-  <span><%= @swap.name %></span><span class="pull-right">Starts in <span id="time"></span></span>
+  <span><%= @swap.name %></span><span class="pull-right"><span id="time"></span></span>
 </span>
   <p>Created by <b><%= @swap.swapper_name %></b></p>
   <p>Created at <b><%= @swap.created_at %></b></p>
@@ -41,8 +41,8 @@ handler.buildMap({ provider: {maxZoom: 18, disableDefaultUI: true}, internal: {i
 function startTimer(duration, display) {
     var timer = duration, hours, minutes, seconds;
     setInterval(function () {
-        hours = parseInt(timer / 3600, 10)
-        minutes = parseInt(timer % 60, 10)
+        hours = parseInt(timer / 3600, 10);
+        minutes = parseInt((timer / 60)%60, 10);
         seconds = parseInt(timer % 60, 10);
 
         hours = hours < 10 ? "0" + hours : hours;
@@ -60,7 +60,11 @@ function startTimer(duration, display) {
 window.onload = function () {
     var timeleft = <%= @cooldown %>,
         display = document.querySelector('#time');
-    startTimer(timeleft, display);
+        if (timeleft > 0)
+        startTimer(timeleft, display);
+        else
+        display = document.querySelector('#time')
+        display.textContent = "Over";
 };
 </script>
 
