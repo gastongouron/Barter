@@ -67,23 +67,27 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
       if @pick
         if @pick.chosen == false
-          #@barter.timecoin += 1
+
           @pick.chosen = true
           @swap.bart_id = @pick.id
+          @barter.timecoin += 1
+          @barter.save
           @pick.save
           @swap.save
           flash.now[:alert] = "You selected a barter for this swap."
         elsif @pick.chosen == true
           @pick.chosen = false
+          @barter.timecoin -= 1
           @swap.bart_id = nil
           @swap.barter_id = nil
+          @barter.save
           @pick.save
           @swap.save
           flash.now[:alert] = "You unselected this Barter."
         end
-        redirect_to [@swap, @bart]
-      end
 
+      end
+    redirect_to [@swap, @bart]
   end
 
   def destroy
@@ -124,11 +128,5 @@ private
       redirect_to root_path
     end
   end
-
-  # def belongstoswap(swap)
-  #   swap.barts.each do |bart|
-  #     bart.chosen.any? {|chosen| chosen == true }
-  #   end
-  # end
 
 end

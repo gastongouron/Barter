@@ -51,7 +51,6 @@ gem "carrierwave", "~> 0.10.0"
 gem "fog", "~> 1.29.0"
 gem "rails_12factor", group: :production
 gem "puma", group: :production
-gem 'turbolinks'
 gem "sinatra"
 
 group :development, :test do

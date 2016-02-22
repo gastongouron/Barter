@@ -16,7 +16,7 @@ before_action :require_signin!, except: [:show, :index]
       flash[:notice] = "Bart has been created."
       redirect_to [@swap]
     else
-      flash.now[:alert] = "Bart has not been created."
+      flash.now[:alert] = "Bart has not been created. You can only create one Bart per Swap"
       render "new"
     end
   end
