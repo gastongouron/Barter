@@ -20,7 +20,6 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
       @swap.swapper_id = current_user.id
       @swapcreator = User.find_by(id: @swap.swapper_id)
       @swap.swapper_name = @swapcreator.name
-      p "-----------------------------------------"
     end
 
     if @swap.save
@@ -35,10 +34,8 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
   end
 
   def show
-      a = Geocoder.search(@swap.location)
-      ll = a[0].data["geometry"]["location"]
-      @lat = ll['lat']
-      @lng = ll['lng']
+    p "--------------------------------"
+    a = Geocoder.search(@swap.location)
   end
 
   def edit
@@ -50,11 +47,12 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
     ll = a[0].data["geometry"]["location"]
     @lat = ll['lat']
     @lng = ll['lng']
-
-      @pick = Bart.find_by(owner:params["swap"]["owner"])
-      @barter = User.find_by(id:params["swap"]["barter_id"])
-
-      @barter.save if @barter
+    @time = @swap.start
+    @timenow = DateTime.now
+    @cooldown = @time - @timenow
+    @pick = Bart.find_by(owner:params["swap"]["owner"])
+    @barter = User.find_by(id:params["swap"]["barter_id"])
+    @barter.save if @barter
 
       @swap.barts.each do |bart|
         bart.chosen = false
@@ -62,25 +60,22 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
       end
 
       if @pick
-      if @pick.chosen == false
-      #@barter.timecoin += 1
-      @pick.chosen = true
-      @swap.bart_id = @pick.id
-      @pick.save
-      @swap.save
-      flash.now[:alert] = "You selected a barter for this swap."
-
-      elsif @pick.chosen == true
-      @pick.chosen = false
-      @swap.bart_id = nil
-      @swap.barter_id = nil
-      @pick.save
-      @swap.save
-      flash.now[:alert] = "You unselected this Barter."
-      end
-      p "---------------------------------------------------"
-      p @pick
-      redirect_to [@swap, @bart]
+        if @pick.chosen == false
+          #@barter.timecoin += 1
+          @pick.chosen = true
+          @swap.bart_id = @pick.id
+          @pick.save
+          @swap.save
+          flash.now[:alert] = "You selected a barter for this swap."
+        elsif @pick.chosen == true
+          @pick.chosen = false
+          @swap.bart_id = nil
+          @swap.barter_id = nil
+          @pick.save
+          @swap.save
+          flash.now[:alert] = "You unselected this Barter."
+        end
+        redirect_to [@swap, @bart]
       end
 
   end

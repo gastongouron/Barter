@@ -18,7 +18,7 @@ handler.buildMap({ provider: {maxZoom: 18, disableDefaultUI: true}, internal: {i
   markers = handler.addMarkers([
     {
       "lat": <%= @lat %>,
-      "lng": <%= @lng %>
+      "lng": <%= @lng %>,
     }
   ]);
   handler.bounds.extendWith(markers);
@@ -27,12 +27,40 @@ handler.buildMap({ provider: {maxZoom: 18, disableDefaultUI: true}, internal: {i
 </script>
 
 <header>
-  <h1><%= @swap.name %></h1>
+  <h1><%= @swap.name %> | Starts in <span id="time"></span></h1>
   <p>Created by <b><%= @swap.swapper_name %></b></p>
   <p>Created at <b><%= @swap.created_at %></b></p>
   <p>Description <b><%= @swap.description %></b></p>
   <p>Location <b><%= @swap.location %></b></p>
   <p>Start <b><%= @swap.start %></b></p>
+
+</body>
+<script>
+function startTimer(duration, display) {
+    var timer = duration, hours, minutes, seconds;
+    setInterval(function () {
+        hours = parseInt(timer / 3600, 10)
+        minutes = parseInt(timer % 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = hours + ":" + minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
+window.onload = function () {
+    var timeleft = <%= @cooldown %>,
+        display = document.querySelector('#time');
+    startTimer(timeleft, display);
+};
+</script>
 
   <ul class="actions">
   <% if current_user.id == @swap.swapper_id %>

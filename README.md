@@ -1,5 +1,7 @@
 #barter
 
+https://trello.com/b/GA0XRtxT/barter
+
 TimeUp (trouver un meilleur nom pour le produit)
 Un réseau social permettant aux utilisateurs de bénéficier les uns des autres pour des services executables en moins d’une heure.
 

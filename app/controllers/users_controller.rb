@@ -21,7 +21,16 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @swaps = Swap.where(swapper_id:params[:id])
-    p @barts = Bart.where(owner:current_user.id)
+    # How to get timers for each swap..
+    @cooldown = []
+    @swaps.each do |swap|
+      time = swap.start
+      timenow = DateTime.now
+      @cooldown << (time - timenow)
+    end
+    p @cooldown
+    @barts = Bart.where(owner:current_user.id)
+
   end
 
   def update

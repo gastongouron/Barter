@@ -14,22 +14,7 @@ RSpec.feature "Users can create new barts" do
     click_link swap.name
     click_link "New Bart"
 
-    # message = "You need to sign in or sign up before continuing."
-    # expect(page).to have_content(message)
-    # fill_in "Name", with: user.name
-    # fill_in "Password", with: user.password
-    # click_button "Sign in"
-    # click_link swap.name
-    # click_link "New Bart"
-
   end
-
-  # before do
-  #   define_permission!(user, "view", swap)
-  #   swap = FactoryGirl.create(:swap, name: "Internet Explorer")
-  #   visit swap_path(swap)
-  #   click_link "New Bart"
-  # end
 
   scenario "with valid attributes" do
     fill_in "Name", with: "Non-standards compliance"
