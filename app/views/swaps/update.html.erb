@@ -1,0 +1,131 @@
+
+
+<% title(@swap.name, "Swaps") %>
+
+<title>
+  <% if content_for?(:title) %>
+    <%= yield(:title) %>
+  <% else %>
+    Barter
+  <% end %>
+</title>
+</div>
+<div style='width: 100%'>
+  <div id="map" style='width: 100%; height: 300px;'></div>
+</div>
+<div class="container">
+
+
+<header>
+  <span class="h1">
+  <span><%= @swap.name %></span><span class="pull-right"><span id="time"></span></span><br>
+</span>
+  <span><b>Created by </b><%= @swap.swapper_name %></span><br>
+  <span><b>Created at </b><%= @swap.created_at %></span><br>
+  <span><b>Location </b><%= @swap.location %></span><br>
+  <span><b>Start </b><%= @swap.start %></span><br>
+  <span><b>Description </b><%= @swap.description %></span>
+
+</body>
+
+  <ul class="actions">
+  <% if current_user.id == @swap.swapper_id %>
+    <li><%= link_to "Edit Swap", edit_swap_path(@swap),
+    class: "edit" %></li>
+    <li><%= link_to "Delete Swap", swap_path(@swap),
+     method: :delete,
+     data: { confirm: "Are you sure you want to delete this swap?" },
+     class: "delete" %></li>
+  <% end %>
+  </ul>
+</header>
+
+<header>
+  <h2>Current barts for this swap</h2>
+  <ul class="actions">
+    <% if current_user.id != @swap.swapper_id && @swap.barts.each {|bart| bart.owner > 0}  %>
+    <li><%= link_to "New Bart", new_swap_bart_path(@swap), class: "new" %></li>
+    <% end %>
+  </ul>
+</header>
+
+
+<div id="barts">
+
+  <% @swap.barts.reverse.each do |bart| %>
+
+
+      <%= link_to bart.name, [@swap, bart] %>
+      <p><%= bart.description %></p>
+
+
+      <span id="author">Created by <b><%= bart.user.email %></b></span>
+
+      <% if current_user.id == @swap.swapper_id && bart.chosen == false %>
+        <%= simple_form_for(@swap) do %>
+          <%= hidden_field(:swap, :barter_id, :value => bart.user.id) %>
+          <%= hidden_field(:swap, :owner, :value => bart.user.id) %>
+          <%= submit_tag("Swap with this barter", class: "select pull-right") %>
+        <% end %>
+
+      <% elsif current_user.id == @swap.swapper_id && bart.chosen == true %>
+        <%= simple_form_for(@swap) do %>
+          <%= hidden_field(:swap, :barter_id, :value => bart.user.id) %>
+          <%= hidden_field(:swap, :owner, :value => bart.user.id) %>
+          <%= submit_tag("Unpick", class: "select pull-right") %>
+        <% end %>
+      <% end %>
+
+      <br><br>
+
+  <% end %>
+</div>
+
+
+
+
+<script>
+function startTimer(duration, display) {
+    var timer = duration, hours, minutes, seconds;
+    setInterval(function () {
+        hours = parseInt(timer / 3600, 10);
+        minutes = parseInt((timer / 60)%60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = "Starts in " + hours + ":" + minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
+window.onload = function () {
+    var timeleft = <%= @cooldown %>,
+        display = document.querySelector('#time');
+        if (timeleft > 0)
+        startTimer(timeleft, display);
+        else
+        display = document.querySelector('#time')
+        display.textContent = "Over";
+};
+
+</script>
+
+<script>
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {maxZoom: 18, disableDefaultUI: true}, internal: {id: 'map'}}, function(){
+  markers = handler.addMarkers([
+    {
+      "lat": <%= @lat %>,
+      "lng": <%= @lng %>,
+    }
+  ]);
+  handler.bounds.extendWith(markers);
+  handler.fitMapToBounds();
+});
+</script>

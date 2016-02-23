@@ -70,7 +70,7 @@ before_action :set_swap, only: [:show, :edit, :update, :destroy]
 
           @pick.chosen = true
           @swap.bart_id = @pick.id
-          @barter.timecoin += 1
+
           @barter.save
           @pick.save
           @swap.save
@@ -127,6 +127,10 @@ private
       flash[:alert] = "You must have a timecoin to do that."
       redirect_to root_path
     end
+  end
+
+  def addtimecoin
+    timecoin += 1
   end
 
 end
