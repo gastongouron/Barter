@@ -1,0 +1,19 @@
+<header>
+  <h1>Services</h1>
+    <ul class="actions">
+      <li>
+        <% if current_user && current_user.timecoin >= 1 %>
+        <%= link_to "New Service", new_service_path, class: "new" %>
+        <% end %>
+      </li>
+    </ul>
+</header>
+
+<div id="services">
+  <% @services.each do |service| %>
+    <p><h2><%= link_to service.name, service %> created by <b><%= service.serviceper_name %></b></h2></p>
+    <p><b>created</b> <%= service.created_at %><br>
+    <b>description</b> <%= service.description %></p>
+    <hr>
+  <% end %>
+</div>

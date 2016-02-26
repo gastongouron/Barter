@@ -11,24 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218090016) do
+ActiveRecord::Schema.define(version: 20160222151848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "barts", force: :cascade do |t|
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "helps", force: :cascade do |t|
     t.string   "name"
     t.integer  "owner"
     t.text     "description"
     t.boolean  "chosen",      default: false
-    t.integer  "swap_id"
+    t.integer  "service_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "user_id"
   end
 
-  add_index "barts", ["swap_id"], name: "index_barts_on_swap_id", using: :btree
-  add_index "barts", ["user_id"], name: "index_barts_on_user_id", using: :btree
+  add_index "helps", ["service_id"], name: "index_helps_on_service_id", using: :btree
+  add_index "helps", ["user_id"], name: "index_helps_on_user_id", using: :btree
 
   create_table "permissions", force: :cascade do |t|
     t.integer  "user_id"
@@ -39,18 +55,18 @@ ActiveRecord::Schema.define(version: 20160218090016) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "swaps", force: :cascade do |t|
+  create_table "services", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.string   "location"
     t.datetime "start"
     t.datetime "end"
-    t.integer  "swapper_id"
-    t.integer  "barter_id"
-    t.integer  "bart_id"
-    t.string   "swapper_name"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer  "serviceper_id"
+    t.integer  "helper_id"
+    t.integer  "help_id"
+    t.string   "serviceper_name"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,5 +79,5 @@ ActiveRecord::Schema.define(version: 20160218090016) do
     t.integer  "timecoin",        default: 1
   end
 
-  add_foreign_key "barts", "swaps"
+  add_foreign_key "helps", "services"
 end

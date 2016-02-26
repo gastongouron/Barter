@@ -1,8 +1,8 @@
-class Swap < ActiveRecord::Base
+class Service < ActiveRecord::Base
 
   acts_as_mappable
 
-  has_many  :barts, dependent: :delete_all
+  has_many  :helps, dependent: :delete_all
   has_many  :permissions, as: :thing
 
   validates :name,        presence: true

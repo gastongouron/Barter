@@ -29,7 +29,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #maps
 gem 'gmaps4rails'
 gem 'underscore-rails'
-
+gem 'delayed_job', '~> 4.1', '>= 4.1.1'
+gem 'delayed_job_active_record'
+gem 'daemon-spawn', '0.4.2'
 #geokit
 gem 'geocoder'
 gem 'geokit-rails'
@@ -51,7 +53,6 @@ gem "carrierwave", "~> 0.10.0"
 gem "fog", "~> 1.29.0"
 gem "rails_12factor", group: :production
 gem "puma", group: :production
-gem 'turbolinks'
 gem "sinatra"
 
 group :development, :test do

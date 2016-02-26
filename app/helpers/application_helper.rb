@@ -3,7 +3,7 @@ module ApplicationHelper
   def title(*parts)
     unless parts.empty?
       content_for :title do
-        (parts << "Barter").join(" - ")
+        (parts << "Helper").join(" - ")
       end
     end
   end

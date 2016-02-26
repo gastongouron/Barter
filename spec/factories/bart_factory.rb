@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :bart do
-    name "Example bart"
-    description "An example bart, nothing more"
+  factory :help do
+    name "Example help"
+    description "An example help, nothing more"
   end
 end

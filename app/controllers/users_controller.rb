@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       session[:user_id] = @user.id
       flash[:notice] = "You have signed up successfully."
-      redirect_to swaps_path
+      redirect_to services_path
     else
       render :new
     end
@@ -20,8 +20,17 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @swaps = Swap.where(swapper_id:params[:id])
-    p @barts = Bart.where(owner:current_user.id)
+    @services = Service.where(serviceper_id:params[:id])
+    # How to get timers for each service..
+    @cooldown = []
+    @services.each do |service|
+      time = service.start
+      timenow = DateTime.now
+      @cooldown << (time - timenow)
+    end
+    p @cooldown
+    @helps = Help.where(owner:current_user.id)
+
   end
 
   def update

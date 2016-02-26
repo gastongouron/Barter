@@ -1,4 +1,6 @@
-#barter
+#helper
+
+https://trello.com/b/GA0XRtxT/helper
 
 TimeUp (trouver un meilleur nom pour le produit)
 Un réseau social permettant aux utilisateurs de bénéficier les uns des autres pour des services executables en moins d’une heure.
@@ -63,9 +65,9 @@ job: Changer les ampoules dans la maison
 other job characteristics should be outside/inside and many funny stuff like that.
 
 Ideas:
-An user can warn for inapropriate contents in other users swaps
+An user can warn for inapropriate contents in other users services
 An user can rate user for the quality of service
-An user MUST select 'categories' when creating the swap
+An user MUST select 'categories' when creating the service
 An user can filter by category
 
 Tags/filtering/creating a service with n tags/categories:
@@ -77,19 +79,19 @@ Avec matériel/sans matériel
 
 Todo:
 -> Admins users / superusers
--> Timer for Swaps
+-> Timer for Services
 -> User profiles
 -> extend DB fields / Add migrations
 -> More TDD for extra features:
     -> User have timecoins
     -> User loose timecoins when creating a service
     -> User gain timecoins when executing a service
--> Cleaning methods in swaps#controller for havemoney? et getrich?
+-> Cleaning methods in services#controller for havemoney? et getrich?
 -> Hiding link for routes such as deletes/new/create
 -> Think about a notation system:
     -> An user can 'star' an user that gave him a service to say the quality of the service
-    -> An user can 'star' an user that commanditate a service to say the quality of the contact with the swapper
+    -> An user can 'star' an user that commanditate a service to say the quality of the contact with the serviceper
 
--> more forms validations for contents on service creation/bart creations
+-> more forms validations for contents on service creation/help creations
 -> Implement simpleforms for user login/signup
 -> (more to come)...

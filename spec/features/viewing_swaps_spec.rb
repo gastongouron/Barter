@@ -1,14 +1,14 @@
 require 'spec_helper'
-feature "Viewing swaps" do
+feature "Viewing services" do
   let!(:user) { FactoryGirl.create(:user) }
-  let!(:swap) { FactoryGirl.create(:swap) }
+  let!(:service) { FactoryGirl.create(:service) }
   before do
     sign_in_as!(user)
-    define_permission!(user, :view, swap)
+    define_permission!(user, :view, service)
   end
-  scenario "Listing all swaps" do
+  scenario "Listing all services" do
     visit '/'
-    click_link swap.name
-    expect(page.current_url).to eql(swap_url(swap))
+    click_link service.name
+    expect(page.current_url).to eql(service_url(service))
   end
 end

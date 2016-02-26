@@ -17,8 +17,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
-@import "swaps";
-@import "responsive";
+@import "services";
 
 header {
   @extend .page-header;
@@ -88,10 +87,14 @@ a.delete {
 }
 
 .alert-notice {
+  z-index: 10;
+  margin-top: 20px;
   @extend .alert-success;
 }
 
 .alert-alert {
+  z-index: 10;
+  margin-top: 20px;
   @extend .alert-danger;
 }
 
