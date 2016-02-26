@@ -1,2 +1,0 @@
-module SwapsHelper
-end

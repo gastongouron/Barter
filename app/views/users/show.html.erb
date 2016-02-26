@@ -7,28 +7,28 @@
 
 <div class="row">
 <div class="col-md-6">
-<h1>Current swaps</h1>
+<h1>Current services</h1>
 
- <% @swaps.each do |swap| %>
+ <% @services.each do |service| %>
 
-  <h3><%= swap.name %></h3>
+  <h3><%= service.name %></h3>
 
-  <% unless swap.barts.empty? %>
+  <% unless service.helps.empty? %>
 
-    <% swap.barts.each do |bart| %>
-      <% if bart.chosen %>
-      <h5>Chosen barts for this swap </h5>
-      <p><%= bart.name %></p>
+    <% service.helps.each do |help| %>
+      <% if help.chosen %>
+      <h5>Chosen helps for this service </h5>
+      <p><%= help.name %></p>
       <% end %>
     <% end %>
 
-    <h5>Current barts for this swap </h5>
-      <% swap.barts.each do |bart| %>
-        <p><%= bart.name %></p>
+    <h5>Current helps for this service </h5>
+      <% service.helps.each do |help| %>
+        <p><%= help.name %></p>
       <% end %>
 
   <% else %>
-    <p> No currents barts for this swap</p>
+    <p> No currents helps for this service</p>
   <% end %>
 
 <% end %>
@@ -36,16 +36,16 @@
 
 <div class="col-md-6">
 
-  <h1>Chosen barts</h1>
-  <% @barts.each do |bart| %>
-    <p><%= bart.name if bart.chosen %></p>
+  <h1>Chosen helps</h1>
+  <% @helps.each do |help| %>
+    <p><%= help.name if help.chosen %></p>
   <% end %>
 
-  <h1>Current barts</h1>
+  <h1>Current helps</h1>
 
-  <% @barts.each do |bart| %>
+  <% @helps.each do |help| %>
 
-    <p><%= bart.name %></p>
+    <p><%= help.name %></p>
 
   <% end %>
 </div>

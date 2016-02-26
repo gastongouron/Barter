@@ -19,14 +19,14 @@ Rails.application.routes.draw do
 
   post "/signin", to: "sessions#create"
 
-  root "swaps#index"
+  root "services#index"
 
-  put "/swaps/:id" => "swaps#barter"
+  put "/services/:id" => "services#helper"
 
   delete "/signout", to: "sessions#destroy", as: "signout"
 
-  resources :swaps do
-    resources :barts
+  resources :services do
+    resources :helps
   end
 
   resources :users

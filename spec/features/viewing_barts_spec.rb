@@ -1,31 +1,31 @@
 require "rails_helper"
 
-RSpec.feature "Users can view barts" do
+RSpec.feature "Users can view helps" do
 
   before do
-    sublime = FactoryGirl.create(:swap, name: "Sublime Text 3")
+    sublime = FactoryGirl.create(:service, name: "Sublime Text 3")
 
     user = FactoryGirl.create(:user)
-    bart = FactoryGirl.create(:bart,
-        swap: sublime,
+    help = FactoryGirl.create(:help,
+        service: sublime,
         name: "Make it shiny!",
         description: "Gradients! Starbursts! Oh my!")
-    bart.update(user: user)
+    help.update(user: user)
 
-    ie = FactoryGirl.create(:swap, name: "Internet Explorer")
+    ie = FactoryGirl.create(:service, name: "Internet Explorer")
     define_permission!(user, "view", ie)
-    FactoryGirl.create(:bart, swap: ie,
+    FactoryGirl.create(:help, service: ie,
       name: "Standards compliance", description: "Isn't a joke.")
     sign_in_as!(user)
     visit "/" end
 
-    scenario "for a given swap" do
+    scenario "for a given service" do
       click_link "Sublime Text 3"
       expect(page).to have_content "Make it shiny!"
       expect(page).to_not have_content "Standards compliance"
       click_link "Make it shiny!"
 
-      within("#bart h2") do
+      within("#help h2") do
         expect(page).to have_content "Make it shiny!"
       end
       expect(page).to have_content "Gradients! Starbursts! Oh my!"

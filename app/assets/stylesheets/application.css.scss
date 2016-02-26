@@ -17,8 +17,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
-@import "swaps";
-@import "responsive";
+@import "services";
 
 header {
   @extend .page-header;
