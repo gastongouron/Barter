@@ -20,7 +20,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @services = Service.where(serviceper_id:params[:id])
+    @services = Service.where(servicer_id:params[:id])
     # How to get timers for each service..
     @cooldown = []
     @services.each do |service|

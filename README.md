@@ -90,7 +90,7 @@ Todo:
 -> Hiding link for routes such as deletes/new/create
 -> Think about a notation system:
     -> An user can 'star' an user that gave him a service to say the quality of the service
-    -> An user can 'star' an user that commanditate a service to say the quality of the contact with the serviceper
+    -> An user can 'star' an user that commanditate a service to say the quality of the contact with the servicer
 
 -> more forms validations for contents on service creation/help creations
 -> Implement simpleforms for user login/signup

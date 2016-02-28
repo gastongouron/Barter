@@ -11,7 +11,7 @@
 
 <div id="services">
   <% @services.each do |service| %>
-    <p><h2><%= link_to service.name, service %> created by <b><%= service.serviceper_name %></b></h2></p>
+    <p><h2><%= link_to service.name, service %> created by <b><%= service.servicer_name %></b></h2></p>
     <p><b>created</b> <%= service.created_at %><br>
     <b>description</b> <%= service.description %></p>
     <hr>

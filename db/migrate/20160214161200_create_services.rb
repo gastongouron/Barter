@@ -1,15 +1,16 @@
 class CreateServices < ActiveRecord::Migration
   def change
-    create_table :services do |t|
-      t.string :name
-      t.string :description
-      t.string :location
-      t.datetime  :start
-      t.datetime  :end
-      t.integer   :serviceper_id
+    create_table  :services do |t|
+      t.string    :name
+      t.string    :description
+      t.string    :location
+      t.string    :servicer_name
+      t.integer   :servicer_id
       t.integer   :helper_id
       t.integer   :help_id
-      t.string    :serviceper_name
+      t.datetime  :start
+      t.datetime  :end
+      t.boolean   :credited, default: false
 
       t.timestamps null: false
     end
