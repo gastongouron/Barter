@@ -5,50 +5,78 @@
 
  <%= link_to "Edit Profile", edit_user_path %>
 <hr>
+
 <div class="row">
+
 <div class="col-md-6">
 
-<h3>Current services</h3>
+<% if @active_services.any? %>
+  <h3>Active services</h3>
+<% end %>
 
-
-
- <% @services.each do |service| %>
-  <h3><%= service.name %></h3>
+  <% @active_services.each do |service| %>
+  <b><%= service.name %></b>
 
   <% unless service.helps.empty? %>
-
     <% service.helps.each do |help| %>
       <% if help.chosen %>
-      <h5>Chosen helps for this service </h5>
-      <p><%= help.name %></p>
-      <% end %>
-    <% end %>
-
-    <h5>Current helps for this service </h5>
-      <% service.helps.each do |help| %>
+        <h5>Chosen helps for this service </h5>
         <p><%= help.name %></p>
       <% end %>
+  <% end %>
+
+  <h5>Current helps for this service </h5>
+    <% service.helps.each do |help| %>
+    <p><%= help.name %></p>
+  <% end %>
 
   <% else %>
     <p> No currents helps for this service</p>
   <% end %>
+<% end %>
 
+
+  <% if @archived_services.any? %>
+  <h3>Archived services</h3>
+  <% end %>
+  <% @archived_services.each do |service| %>
+  <b><%= service.name %></b>
+
+  <% unless service.helps.empty? %>
+    <% service.helps.each do |help| %>
+      <% if help.chosen %>
+        <h5>Chosen helps for this service </h5>
+        <p><%= help.name %></p>
+      <% end %>
+  <% end %>
+
+  <h5>Current helps for this service </h5>
+    <% service.helps.each do |help| %>
+    <p><%= help.name %></p>
+  <% end %>
+
+  <% else %>
+    <p> No currents helps for this service</p>
+  <% end %>
 <% end %>
 </div>
 
-<div class="col-md-6">
 
+
+
+<div class="col-md-6">
+  <% if @helps.any? %>
   <h3>Chosen helps</h3>
   <% @helps.each do |help| %>
     <p><%= help.name if help.chosen %></p>
   <% end %>
-
-  <h3>Current helps</h3>
-
-  <% @helps.each do |help| %>
-
-    <p><%= help.name %></p>
-
   <% end %>
-</div>
+
+  <% if @helps.any? %>
+  <h3>Current helps</h3>
+    <% @helps.each do |help| %>
+      <p><%= help.name %></p>
+    <% end %>
+    <% end %>
+  </div>
 </div>

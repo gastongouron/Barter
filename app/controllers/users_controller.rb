@@ -20,10 +20,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @services = Service.where(servicer_id:params[:id])
-    # How to get timers for each service..
+    @active_services = Service.where(servicer_id:params[:id], archived: false)
+    @archived_services = Service.where(servicer_id:params[:id], archived: true)
+
     @cooldown = []
-    @services.each do |service|
+    @active_services.each do |service|
       time = service.start
       timenow = DateTime.now
       @cooldown << (time - timenow)

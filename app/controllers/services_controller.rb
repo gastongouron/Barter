@@ -23,8 +23,8 @@ before_action :set_service, only: [:show, :edit, :update, :destroy]
     end
 
     if @service.save
-      current_user.timecoin -= 1
-      current_user.save
+     current_user.timecoin -= 1
+     current_user.save
       flash[:notice] = "Service has been created."
       redirect_to @service
     else
@@ -64,7 +64,7 @@ before_action :set_service, only: [:show, :edit, :update, :destroy]
         help.save
       end
 
-      # change this ASAP
+      # change this weird logic ASAP
       if @pick
         if @pick.chosen == false
           @pick.chosen = true
@@ -119,17 +119,6 @@ private
     rescue ActiveRecord::RecordNotFound
     flash[:alert] = "The service you were looking for could not be found."
     redirect_to services_path
-  end
-
-  def must_be_rich!
-    if current_user.timecoin < 1
-      flash[:alert] = "You must have a timecoin to do that."
-      redirect_to root_path
-    end
-  end
-
-  def add_time_coin(obj)
-    obj.timecoin += 1
   end
 
 end

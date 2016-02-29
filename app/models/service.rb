@@ -17,14 +17,12 @@ class Service < ActiveRecord::Base
     services.each do |service|
       if service.start < Time.now
       service.archived = true
-
       service.save
       end
     end
   end
 
   def self.credit_service
-
     p ended_jobs = Service.where(archived: true, credited: false)
 
     users_to_credit_once = []
@@ -40,9 +38,7 @@ class Service < ActiveRecord::Base
       user.timecoin += 1
       user.save
     end
-
   end
-
 
 end
 

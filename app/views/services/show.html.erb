@@ -18,8 +18,8 @@
 
 <header>
   <span class="h1">
-  <span><%= @service.name %></span><span class="pull-right"><span id="time"></span></span><br>
-</span>
+  <span><%= @service.name %></span>
+  <span class="pull-right"><span id="time"></span></span><br></span>
   <span><b>Created by </b><%= @service.servicer_name %></span><br>
   <span><b>Created at </b><%= @service.created_at %></span><br>
   <span><b>Location </b><%= @service.location %></span><br>
@@ -108,10 +108,9 @@ window.onload = function () {
     var timeleft = <%= @cooldown %>,
         display = document.querySelector('#time');
         if (timeleft > 0)
-        startTimer(timeleft, display);
+          startTimer(timeleft, display);
         else
-        display = document.querySelector('#time')
-        display.textContent = "Over";
+          display.textContent = "Over";
 };
 
 </script>

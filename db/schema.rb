@@ -49,10 +49,10 @@ ActiveRecord::Schema.define(version: 20160226123310) do
     t.integer  "help_id"
     t.datetime "start"
     t.datetime "end"
-    t.boolean  "credited",      default: false
+    t.boolean  "credited",                      default: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.boolean  "archived",      default: false
+    t.boolean  "archived",                      default: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 20160226123310) do
     t.string   "password_digest"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
-    t.boolean  "admin",           default: false
-    t.integer  "timecoin",        default: 1
+    t.boolean  "admin",                           default: false
+    t.integer  "timecoin",                        default: 1
   end
 
   add_foreign_key "helps", "services"
