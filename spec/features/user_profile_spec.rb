@@ -8,7 +8,7 @@ feature "Profile page" do
   end
 end
 feature "Editing Users" do
-  scenario "Updating a swap" do
+  scenario "Updating a service" do
     user = FactoryGirl.create(:user)
     visit user_path(user)
     click_link "Edit Profile"

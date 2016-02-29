@@ -1,0 +1,33 @@
+<div id="help">
+  <header>
+    <h1><%= @service.name %></h1>
+  </header>
+  <header>
+    <h2><%= @help.name %></h2>
+    <span id='author'>Created by <%= @help.user.email %></span>
+
+    <%= link_to "Edit", [:edit, @service, @help] %>
+    <%= link_to "Delete", [@service, @help], method: :delete, data: { confirm: "Are you sure you want to delete this offer?"} %>
+
+
+</header>
+  <%= simple_format(@help.description) %>
+</div>
+<hr>
+
+  <span id="author">Created by <b><%= @help.user.email %></b></span>
+
+      <% if current_user.id == @service.servicer_id && @help.chosen == false %>
+        <%= simple_form_for(@service) do %>
+          <%= hidden_field(:service, :@helper_id, :value => @help.user.id) %>
+          <%= hidden_field(:service, :owner, :value => @help.user.id) %>
+          <%= submit_tag("Service with this @helper", class: "select pull-right") %>
+        <% end %>
+
+      <% elsif current_user.id == @service.servicer_id && @help.chosen == true %>
+        <%= simple_form_for(@service) do %>
+          <%= hidden_field(:service, :@helper_id, :value => @help.user.id) %>
+          <%= hidden_field(:service, :owner, :value => @help.user.id) %>
+          <%= submit_tag("Unpick", class: "select pull-right") %>
+        <% end %>
+      <% end %>

@@ -23,13 +23,15 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+
+gem 'rufus-scheduler'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
 #maps
 gem 'gmaps4rails'
 gem 'underscore-rails'
-
+gem 'daemon-spawn', '0.4.2'
 #geokit
 gem 'geocoder'
 gem 'geokit-rails'
@@ -51,7 +53,6 @@ gem "carrierwave", "~> 0.10.0"
 gem "fog", "~> 1.29.0"
 gem "rails_12factor", group: :production
 gem "puma", group: :production
-gem 'turbolinks'
 gem "sinatra"
 
 group :development, :test do
@@ -59,9 +60,8 @@ group :development, :test do
   gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
-#  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 2.0'
 
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
   gem "rspec-rails", "~> 3.2.1"

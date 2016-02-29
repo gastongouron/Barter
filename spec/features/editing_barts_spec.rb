@@ -1,39 +1,39 @@
 require "rails_helper"
 
-  RSpec.feature "Users can edit existing barts" do
-    let!(:swap) { FactoryGirl.create(:swap) }
+  RSpec.feature "Users can edit existing helps" do
+    let!(:service) { FactoryGirl.create(:service) }
     let!(:user) { FactoryGirl.create(:user) }
 
-    let!(:bart) do
-      bart = FactoryGirl.create(:bart, swap: swap)
-      bart.update(user: user)
-      bart
+    let!(:help) do
+      help = FactoryGirl.create(:help, service: service)
+      help.update(user: user)
+      help
     end
 
-    # let!(:swap) { FactoryGirl.create(:swap) }
-    # let!(:bart) { FactoryGirl.create(:bart, swap: swap) }
+    # let!(:service) { FactoryGirl.create(:service) }
+    # let!(:help) { FactoryGirl.create(:help, service: service) }
 
     before do
       sign_in_as!(user)
-      visit swap_bart_path(swap, bart)
+      visit service_help_path(service, help)
       click_link "Edit"
     end
 
     scenario "with valid attributes" do
     fill_in "Name", with: "Make it really shiny!"
 
-    click_button "Update Bart"
-    expect(page).to have_content "Bart has been updated."
-      within("#bart h2") do
+    click_button "Update Help"
+    expect(page).to have_content "Help has been updated."
+      within("#help h2") do
         expect(page).to have_content "Make it really shiny!"
-        expect(page).not_to have_content bart.name
+        expect(page).not_to have_content help.name
       end
     end
 
     scenario "with invalid attributes" do
     fill_in "Name", with: ""
 
-    click_button "Update Bart"
-    expect(page).to have_content "Bart has not been updated."
+    click_button "Update Help"
+    expect(page).to have_content "Help has not been updated."
     end
 end
