@@ -37,7 +37,7 @@ class Service < ActiveRecord::Base
 
     users_to_credit_once.each do |user_id|
       user = User.find_by(id: user_id)
-      user.timecoins += 1
+      user.timecoin += 1
       user.save
     end
 
