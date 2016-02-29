@@ -1,7 +1,10 @@
 <h1><%= @user.name %></h1>
-  <b>Email</b><p><%= @user.email %></p>
-  <b>Timecoins</b><p><%= @user.timecoin %></p>
-  <b>Admin</b><p><%= @user.admin %></p>
+  <p><b>Email </b><%= @user.email %></p>
+  <p><b>Timecoins </b><%= @user.timecoin %></p>
+  <p><b>Admin </b><%= @user.admin %></p>
+
+<%= image_tag(current_user.avatar.url(:thumb), class: 'round-image-50') %>
+
 
  <%= link_to "Edit Profile", edit_user_path %>
 

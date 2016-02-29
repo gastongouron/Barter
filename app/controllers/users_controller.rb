@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   end
 
  def create
+  p params
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
@@ -21,7 +22,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @services = Service.where(servicer_id:params[:id])
-    # How to get timers for each service..
     @cooldown = []
     @services.each do |service|
       time = service.start
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.save
       flash[:notice] = "Profile has been updated."
-      redirect_to users_path
+      redirect_to user_path
     else
       render :new
     end
@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 private
 
   def user_params
-    params.require(:user).permit( :name, :password, :email, :password_confirmation)
+    params.require(:user).permit( :name, :password, :email, :password_confirmation, :avatar)
   end
 
 end

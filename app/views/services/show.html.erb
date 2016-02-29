@@ -18,7 +18,7 @@
 
 <header>
   <span class="h1">
-  <span><%= @service.name %></span><span class="pull-right"><span id="time"></span></span><br>
+  <span><%= @service.name %></span><span class="pull-right"><span id="time" class="mustard"></span></span><br>
 </span>
   <span><b>Created by </b><%= @service.servicer_name %></span><br>
   <span><b>Created at </b><%= @service.created_at %></span><br>
@@ -86,17 +86,25 @@
 
 <script>
 function startTimer(duration, display) {
-    var timer = duration, hours, minutes, seconds;
+    var timer = duration, days, hours, minutes, seconds;
     setInterval(function () {
-        hours = parseInt(timer / 3600, 10);
+        days = parseInt(timer / 86400, 10);
+        hours = parseInt((timer / 3600)%60, 10);
         minutes = parseInt((timer / 60)%60, 10);
         seconds = parseInt(timer % 60, 10);
 
+        days = days < 10 ? "0" + days : days;
         hours = hours < 10 ? "0" + hours : hours;
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        display.textContent = "Starts in " + hours + ":" + minutes + ":" + seconds;
+        if (days > 0){
+        display.textContent = "Starts in " + days + " days " + hours + ":" + minutes + ":" + seconds;
+        }
+        else {
+          display.textContent = "Starts in " + hours + ":" + minutes + ":" + seconds;
+
+        }
 
         if (--timer < 0) {
             timer = duration;
@@ -118,14 +126,125 @@ window.onload = function () {
 
 <script>
 handler = Gmaps.build('Google');
-handler.buildMap({ provider: {maxZoom: 18, disableDefaultUI: true}, internal: {id: 'map'}}, function(){
-  markers = handler.addMarkers([
+handler.buildMap({
+  provider: {
+    maxZoom: 18,
+     styles: [
     {
-      "lat": <%= @lat %>,
-      "lng": <%= @lng %>,
+        "featureType": "landscape",
+        "stylers": [
+            {
+                "hue": "#FFAD00"
+            },
+            {
+                "saturation": 50.2
+            },
+            {
+                "lightness": -34.8
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.highway",
+        "stylers": [
+            {
+                "hue": "#FFAD00"
+            },
+            {
+                "saturation": -19.8
+            },
+            {
+                "lightness": -1.8
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "stylers": [
+            {
+                "hue": "#FFAD00"
+            },
+            {
+                "saturation": 72.4
+            },
+            {
+                "lightness": -32.6
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "stylers": [
+            {
+                "hue": "#FFAD00"
+            },
+            {
+                "saturation": 74.4
+            },
+            {
+                "lightness": -18
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "stylers": [
+            {
+                "hue": "#00FFA6"
+            },
+            {
+                "saturation": -63.2
+            },
+            {
+                "lightness": 38
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "stylers": [
+            {
+                "hue": "#FFC300"
+            },
+            {
+                "saturation": 54.2
+            },
+            {
+                "lightness": -14.4
+            },
+            {
+                "gamma": 1
+            }
+        ]
+    }
+],
+  disableDefaultUI: true
+  },
+  internal: {id: 'map'}}, function(){
+
+  markers = handler.addMarkers([
+ {
+  "lat": <%= @lat %>,
+  "lng": <%= @lng %>,
     }
   ]);
   handler.bounds.extendWith(markers);
   handler.fitMapToBounds();
 });
+
 </script>

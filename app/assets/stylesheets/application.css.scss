@@ -1,23 +1,107 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
  *= require_tree .
  *= require_self
  */
+
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "font-awesome";
 @import "services";
+
+$dark-yellow: #b09133;
+
+.btn-default, a.new {
+    color: white;
+    background-color: #b09133;
+    border-color: #b09133;
+}
+
+.btn-default:hover, a.new:hover {
+    color: #fef5da;
+    background-color: #64531d;
+    border-color: #64531d;
+}
+
+.panel-service-active {
+  background: #fefaec;
+  padding: 20px;
+}
+
+.round-image-50 {
+    background-color: white;
+    border: 1px solid #d9d9d9;
+    border-radius: 50%;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    text-align: center;
+    img { width: 100% }
+}
+
+
+.panel-service-active:hover {
+  background: white;
+  padding: 20px;
+  transition-property: background-color;
+  transition-duration: 2s;
+  transition-timing-fonction: linear;
+}
+
+.mustard {
+  color: $dark-yellow
+}
+
+body {
+  background: #fef5da;
+  color: #32290e;
+}
+
+a {
+  color: #b09133;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #4b3e16;
+  text-decoration: none;
+}
+
+.navbar, .nav {
+  background-color: #b09133;
+  border: 0px;
+  color: #fef5da;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #fef5da;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: white;
+}
+
+.navbar-default .navbar-brand {
+    color: #fef5da;
+    font-weight: bold;
+    font-size: 28px
+}
+.navbar-default .navbar-brand:hover {
+    color: white;
+    font-weight: bold;
+}
+
+.navbar-default .navbar-nav > .active > a {
+  background: #fef5da;
+  color: #b09133;
+}
+
+.navbar-default .navbar-nav > .active > a:hover {
+  background: #fef5da;
+  color: #b09133;
+}
 
 header {
   @extend .page-header;
@@ -90,12 +174,15 @@ a.delete {
   z-index: 10;
   margin-top: 20px;
   @extend .alert-success;
+  background-color: white;
 }
 
 .alert-alert {
   z-index: 10;
   margin-top: 20px;
   @extend .alert-danger;
+  background-color: white;
+
 }
 
 form {

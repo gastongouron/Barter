@@ -1,5 +1,5 @@
 <header>
-  <h1>Services</h1>
+  <h1>Active services</h1>
     <ul class="actions">
       <li>
         <% if current_user && current_user.timecoin >= 1 %>
@@ -10,10 +10,32 @@
 </header>
 
 <div id="services">
-  <% @services.each do |service| %>
+  <% @activeservices.each do |service| %>
+<div class="panel-service-active">
     <p><h2><%= link_to service.name, service %> created by <b><%= service.servicer_name %></b></h2></p>
     <p><b>created</b> <%= service.created_at %><br>
     <b>description</b> <%= service.description %></p>
-    <hr>
+</div><br>
+  <% end %>
+</div>
+
+<header>
+  <h1>Archived services</h1>
+    <ul class="actions">
+      <li>
+        <% if current_user && current_user.timecoin >= 1 %>
+        <%= link_to "New Service", new_service_path, class: "new" %>
+        <% end %>
+      </li>
+    </ul>
+</header>
+
+<div id="services">
+  <% @archivedservices.each do |service| %>
+<div class="panel-service-active">
+    <p><h2><%= link_to service.name, service %> created by <b><%= service.servicer_name %></b></h2></p>
+    <p><b>created</b> <%= service.created_at %><br>
+    <b>description</b> <%= service.description %></p>
+</div><br>
   <% end %>
 </div>
