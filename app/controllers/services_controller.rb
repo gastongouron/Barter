@@ -1,7 +1,5 @@
 class ServicesController < ApplicationController
 
-#before_action :authorize_admin!, except: [:index, :show]
-#before_action :authorize_rich!, except: [:index, :show, :update]
 before_action :require_signin!, only: [:show]
 before_action :set_service, only: [:show, :edit, :update, :destroy]
 
@@ -15,11 +13,12 @@ before_action :set_service, only: [:show, :edit, :update, :destroy]
 
   def create
     @service = Service.new(service_params)
+    @service.end = @service.start + 1*60*60
 
     if current_user
-      @service.serviceper_id = current_user.id
-      @servicecreator = User.find_by(id: @service.serviceper_id)
-      @service.serviceper_name = @servicecreator.name
+      @service.servicer_id = current_user.id
+      @servicecreator = User.find_by(id: @service.servicer_id)
+      @service.servicer_name = @servicecreator.name
     end
 
     if @service.save
@@ -64,6 +63,7 @@ before_action :set_service, only: [:show, :edit, :update, :destroy]
         help.save
       end
 
+      # change this ASAP
       if @pick
         if @pick.chosen == false
           @pick.chosen = true
@@ -102,9 +102,10 @@ private
       :start,
       :end,
       :helper_id,
-      :serviceper_id,
+      :servicer_id,
       :help_id,
-      :archived
+      :archived,
+      :credited
     )
   end
 

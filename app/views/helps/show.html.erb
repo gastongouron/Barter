@@ -17,14 +17,14 @@
 
   <span id="author">Created by <b><%= @help.user.email %></b></span>
 
-      <% if current_user.id == @service.serviceper_id && @help.chosen == false %>
+      <% if current_user.id == @service.servicer_id && @help.chosen == false %>
         <%= simple_form_for(@service) do %>
           <%= hidden_field(:service, :@helper_id, :value => @help.user.id) %>
           <%= hidden_field(:service, :owner, :value => @help.user.id) %>
           <%= submit_tag("Service with this @helper", class: "select pull-right") %>
         <% end %>
 
-      <% elsif current_user.id == @service.serviceper_id && @help.chosen == true %>
+      <% elsif current_user.id == @service.servicer_id && @help.chosen == true %>
         <%= simple_form_for(@service) do %>
           <%= hidden_field(:service, :@helper_id, :value => @help.user.id) %>
           <%= hidden_field(:service, :owner, :value => @help.user.id) %>

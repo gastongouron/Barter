@@ -11,26 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222151848) do
+ActiveRecord::Schema.define(version: 20160226123310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "helps", force: :cascade do |t|
     t.string   "name"
@@ -59,14 +43,16 @@ ActiveRecord::Schema.define(version: 20160222151848) do
     t.string   "name"
     t.string   "description"
     t.string   "location"
-    t.datetime "start"
-    t.datetime "end"
-    t.integer  "serviceper_id"
+    t.string   "servicer_name"
+    t.integer  "servicer_id"
     t.integer  "helper_id"
     t.integer  "help_id"
-    t.string   "serviceper_name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "start"
+    t.datetime "end"
+    t.boolean  "credited",      default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.boolean  "archived",      default: false
   end
 
   create_table "users", force: :cascade do |t|

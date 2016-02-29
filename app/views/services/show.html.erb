@@ -20,7 +20,7 @@
   <span class="h1">
   <span><%= @service.name %></span><span class="pull-right"><span id="time"></span></span><br>
 </span>
-  <span><b>Created by </b><%= @service.serviceper_name %></span><br>
+  <span><b>Created by </b><%= @service.servicer_name %></span><br>
   <span><b>Created at </b><%= @service.created_at %></span><br>
   <span><b>Location </b><%= @service.location %></span><br>
   <span><b>Start </b><%= @service.start %></span><br>
@@ -29,7 +29,7 @@
 </body>
 
   <ul class="actions">
-  <% if current_user.id == @service.serviceper_id %>
+  <% if current_user.id == @service.servicer_id %>
     <li><%= link_to "Edit Service", edit_service_path(@service),
     class: "edit" %></li>
     <li><%= link_to "Delete Service", service_path(@service),
@@ -43,7 +43,7 @@
 <header>
   <h2>Current helps for this service</h2>
   <ul class="actions">
-    <% if current_user.id != @service.serviceper_id && @service.helps.each {|help| help.owner > 0}  %>
+    <% if current_user.id != @service.servicer_id && @service.helps.each {|help| help.owner > 0}  %>
     <li><%= link_to "New Help", new_service_help_path(@service), class: "new" %></li>
     <% end %>
   </ul>
@@ -61,14 +61,14 @@
 
       <span id="author">Created by <b><%= help.user.email %></b></span>
 
-      <% if current_user.id == @service.serviceper_id && help.chosen == false %>
+      <% if current_user.id == @service.servicer_id && help.chosen == false %>
         <%= simple_form_for(@service) do %>
           <%= hidden_field(:service, :helper_id, :value => help.user.id) %>
           <%= hidden_field(:service, :owner, :value => help.user.id) %>
           <%= submit_tag("Service with this helper", class: "select pull-right") %>
         <% end %>
 
-      <% elsif current_user.id == @service.serviceper_id && help.chosen == true %>
+      <% elsif current_user.id == @service.servicer_id && help.chosen == true %>
         <%= simple_form_for(@service) do %>
           <%= hidden_field(:service, :helper_id, :value => help.user.id) %>
           <%= hidden_field(:service, :owner, :value => help.user.id) %>
