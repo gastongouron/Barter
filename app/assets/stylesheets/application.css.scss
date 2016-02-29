@@ -9,29 +9,31 @@
 @import "font-awesome";
 @import "services";
 
-$dark-yellow: #b09133;
+$mustard-yellow: #b09133;
+$light-yellow: #fef5da;
+$dark-yellow: #64531d;
+$very-light-yellow: #fefaec;
+
+.main-color {
+  color: $dark-yellow;
+}
 
 .btn-default, a.new {
     color: white;
-    background-color: #b09133;
-    border-color: #b09133;
+    background-color: $dark-yellow;
+    border-color: $dark-yellow;
 }
 
 .btn-default:hover, a.new:hover {
-    color: #fef5da;
-    background-color: #64531d;
-    border-color: #64531d;
-}
-
-.panel-service-active {
-  background: #fefaec;
-  padding: 20px;
+    color: $light-yellow;
+    background-color: $dark-yellow;
+    border-color: $dark-yellow;
 }
 
 .round-image-50 {
     background-color: white;
-    border: 1px solid #d9d9d9;
-    border-radius: 50%;
+    border: 1px solid $dark-yellow;
+    border-radius: 25px;
     -moz-border-radius: 25px;
     -webkit-border-radius: 25px;
     height: 50px;
@@ -41,13 +43,46 @@ $dark-yellow: #b09133;
     img { width: 100% }
 }
 
+.round-image-100 {
+    background-color: white;
+    border: 1px solid $dark-yellow;
+    border-radius: 50px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    height: 100px;
+    width: 100px;
+    overflow: hidden;
+    text-align: center;
+    img { width: 100% }
+}
+
+
+.panel-service-active {
+  background: $very-light-yellow;
+  padding: 20px;
+  transition: background 0.5s ease-in-out;
+}
 
 .panel-service-active:hover {
   background: white;
   padding: 20px;
-  transition-property: background-color;
-  transition-duration: 2s;
-  transition-timing-fonction: linear;
+}
+
+.panel-service {
+  background: white;
+  padding: 20px;
+  margin: 0px;
+}
+
+.marged {
+  margin-right: 14px;
+  margin-bottom:26px
+}
+
+.panel-helps {
+  background: #fefaec;
+  padding: 20px;
+  margin-top: 0px !important;
 }
 
 .mustard {
@@ -55,12 +90,12 @@ $dark-yellow: #b09133;
 }
 
 body {
-  background: #fef5da;
+  background: $light-yellow;
   color: #32290e;
 }
 
 a {
-  color: #b09133;
+  color: $dark-yellow;
   text-decoration: none;
 }
 
@@ -70,13 +105,13 @@ a:hover {
 }
 
 .navbar, .nav {
-  background-color: #b09133;
+  background-color: $mustard-yellow;
   border: 0px;
-  color: #fef5da;
+  color: $light-yellow;
 }
 
 .navbar-default .navbar-nav > li > a {
-    color: #fef5da;
+    color: $light-yellow;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
@@ -84,9 +119,9 @@ a:hover {
 }
 
 .navbar-default .navbar-brand {
-    color: #fef5da;
+    color: $light-yellow;
     font-weight: bold;
-    font-size: 28px
+    font-size: 27px
 }
 .navbar-default .navbar-brand:hover {
     color: white;
@@ -94,13 +129,13 @@ a:hover {
 }
 
 .navbar-default .navbar-nav > .active > a {
-  background: #fef5da;
-  color: #b09133;
+  background: $mustard-yellow;
+  color: white;
 }
 
 .navbar-default .navbar-nav > .active > a:hover {
-  background: #fef5da;
-  color: #b09133;
+  background: $mustard-yellow;
+  color: white;
 }
 
 header {
@@ -137,7 +172,7 @@ a.new {
 
 .select {
   @extend .btn;
-  @extend .btn-warning;
+  @extend .btn-default;
   padding-right: 0.5em;
   display: inline-block;
   margin-bottom: 0;
@@ -155,7 +190,7 @@ a.new {
 }
 
 a.edit {
-  @extend .btn-primary;
+  @extend .btn-default;
 
   &:before {
     @extend .fa-pencil;
@@ -163,7 +198,7 @@ a.edit {
 }
 
 a.delete {
-  @extend .btn-danger;
+  @extend .btn-default;
 
   &:before {
     @extend .fa-trash;
@@ -203,4 +238,14 @@ body {
 }
 #GMapsID div div a div img{
     display:none;
+}
+
+a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display:none;
+}
+.gmnoprint div {
+    background:none !important;
 }

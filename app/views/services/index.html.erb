@@ -1,4 +1,3 @@
-<header>
   <h1>Active services</h1>
     <ul class="actions">
       <li>
@@ -7,19 +6,37 @@
         <% end %>
       </li>
     </ul>
-</header>
+
 
 <div id="services">
   <% @activeservices.each do |service| %>
-    <div class="panel-service-active">
-    <p><h2><%= link_to service.name, service %> created by <b><%= service.servicer_name %></b></h2></p>
-    <p><b>created</b> <%= service.created_at %><br>
-    <b>description</b> <%= service.description %></p>
+<!--     <div class="panel-service-active"> -->
+    <%= link_to service do %>
+
+    <div class="panel-service-active row">
+
+    <div class="col-md-2">
+      <% prop = User.find_by(id: service.servicer_id) %>
+<%= image_tag(prop.avatar.url(:medium), class: 'round-image-100') %>
+
+    </div>
+
+    <div class="col-md-10">
+
+    <span class="h3 main-color"><%= service.name %></span><br><br>
+    <span>Created by <b><%= service.servicer_name %></b></span>
+    <span>at <b> <%= service.created_at %></b></span><br>
+    <span>Starts <b> <%= service.start %></b></span><br>
+    <span>Ends <b> <%= service.end %></b></span><br>
+
+    <span>description<b> <%= service.description %></b></span>
+
+    </div>
     </div><br>
+    <% end %>
   <% end %>
 </div>
 
-<header>
   <h1>Archived services</h1>
     <ul class="actions">
       <li>
@@ -28,7 +45,7 @@
         <% end %>
       </li>
     </ul>
-</header>
+
 
 <div id="services">
   <% @archivedservices.each do |service| %>
