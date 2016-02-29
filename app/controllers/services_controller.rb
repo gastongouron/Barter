@@ -4,8 +4,13 @@ before_action :require_signin!, only: [:show]
 before_action :set_service, only: [:show, :edit, :update, :destroy]
 
   def index
+<<<<<<< HEAD
     @services = Service.where(archived: false).order('created_at DESC')
     @archived_services = Service.where(archived: true).order('created_at DESC')
+=======
+    @activeservices = Service.where(archived: false).order('created_at DESC')
+    @archivedservices = Service.where(archived: true).order('created_at DESC')
+>>>>>>> c1aeb08e5e3eb260c73297b43acfd1a6456a88ed
   end
 
   def new
