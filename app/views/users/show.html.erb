@@ -1,16 +1,18 @@
 <h1><%= @user.name %></h1>
-  <b>Email</b><p><%= @user.email %></p>
-  <b>Timecoins</b><p><%= @user.timecoin %></p>
-  <b>Admin</b><p><%= @user.admin %></p>
+  <p><b>Email</b> <%= @user.email %></p>
+  <p><b>Timecoins</b> <%= @user.timecoin %></p>
+  <p><b>Admin</b> <%= @user.admin %></p>
 
  <%= link_to "Edit Profile", edit_user_path %>
-
+<hr>
 <div class="row">
 <div class="col-md-6">
-<h1>Current services</h1>
+
+<h3>Current services</h3>
+
+
 
  <% @services.each do |service| %>
-
   <h3><%= service.name %></h3>
 
   <% unless service.helps.empty? %>
@@ -36,12 +38,12 @@
 
 <div class="col-md-6">
 
-  <h1>Chosen helps</h1>
+  <h3>Chosen helps</h3>
   <% @helps.each do |help| %>
     <p><%= help.name if help.chosen %></p>
   <% end %>
 
-  <h1>Current helps</h1>
+  <h3>Current helps</h3>
 
   <% @helps.each do |help| %>
 
