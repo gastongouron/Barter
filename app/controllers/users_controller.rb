@@ -21,13 +21,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-<<<<<<< HEAD
+
     @active_services = Service.where(servicer_id:params[:id], archived: false)
     @archived_services = Service.where(servicer_id:params[:id], archived: true)
 
-=======
-    @services = Service.where(servicer_id:params[:id])
->>>>>>> c1aeb08e5e3eb260c73297b43acfd1a6456a88ed
+    #@services = Service.where(servicer_id:params[:id])
+
     @cooldown = []
     @active_services.each do |service|
       time = service.start
