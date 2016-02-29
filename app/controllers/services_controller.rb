@@ -63,6 +63,7 @@ before_action :set_service, only: [:show, :edit, :update, :destroy]
         help.save
       end
 
+      # change this ASAP
       if @pick
         if @pick.chosen == false
           @pick.chosen = true
@@ -103,7 +104,8 @@ private
       :helper_id,
       :servicer_id,
       :help_id,
-      :archived
+      :archived,
+      :credited
     )
   end
 

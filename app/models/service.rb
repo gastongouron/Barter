@@ -12,10 +12,6 @@ class Service < ActiveRecord::Base
     joins(:permissions).where(permissions: { action: "view", user_id: user.id })
   end
 
-  # def self.do_something
-
-  # end
-
   def self.achieve_service
     services = Service.all
     services.each do |service|
@@ -27,24 +23,25 @@ class Service < ActiveRecord::Base
     end
   end
 
-  # def self.credit_service
+  def self.credit_service
 
-    # when service achievedn if someone helped, credit this person adn save.
-    # else, dont credit anyone and give redit back to user.
-    # later conflict logic comes here :)
-  #   ended_jobs = Service.where(archived: true, credited: false)
-  #   users_to_credit_once = []
+    p ended_jobs = Service.where(archived: true, credited: false)
 
-  #   ended_jobs.each do |job|
-  #    users_to_credit_once << job.helper_id
-  #   end
+    users_to_credit_once = []
 
-  #   users_to_credit_once.each do |user|
-  #     user.timecoins += 1
-  #     user.save
-  #   end
+    ended_jobs.each do |job|
+     users_to_credit_once << job.helper_id
+     job.credited = true
+     job.save
+    end
 
-  # end
+    users_to_credit_once.each do |user_id|
+      user = User.find_by(id: user_id)
+      user.timecoins += 1
+      user.save
+    end
+
+  end
 
 
 end

@@ -31,8 +31,6 @@ gem 'rufus-scheduler'
 #maps
 gem 'gmaps4rails'
 gem 'underscore-rails'
-gem 'delayed_job', '~> 4.1', '>= 4.1.1'
-gem 'delayed_job_active_record'
 gem 'daemon-spawn', '0.4.2'
 #geokit
 gem 'geocoder'
