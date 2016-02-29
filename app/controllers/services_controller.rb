@@ -15,7 +15,6 @@ before_action :set_service, only: [:show, :edit, :update, :destroy]
   def create
     @service = Service.new(service_params)
     @service.end = @service.start + 1*60*60
-
     if current_user
       @service.servicer_id = current_user.id
       @servicecreator = User.find_by(id: @service.servicer_id)
