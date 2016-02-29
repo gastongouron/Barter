@@ -47,44 +47,44 @@ before_action :set_service, only: [:show, :edit, :update, :destroy]
   end
 
   def update
-    # @service.update(service_params)
-    # a = Geocoder.search(@service.location)
-    # ll = a[0].data["geometry"]["location"]
-    # @lat = ll['lat']
-    # @lng = ll['lng']
-    # @time = @service.start
-    # @timenow = DateTime.now
-    # @cooldown = @time - @timenow
-    # @pick = Help.find_by(owner:params["service"]["owner"])
-    # @helper = User.find_by(id:params["service"]["helper_id"])
-    # @helper.save if @helper
+    @service.update(service_params)
+    a = Geocoder.search(@service.location)
+    ll = a[0].data["geometry"]["location"]
+    @lat = ll['lat']
+    @lng = ll['lng']
+    @time = @service.start
+    @timenow = DateTime.now
+    @cooldown = @time - @timenow
+    @pick = Help.find_by(owner:params["service"]["owner"])
+    @helper = User.find_by(id:params["service"]["helper_id"])
+    @helper.save if @helper
 
-    #   @service.helps.each do |help|
-    #     help.chosen = false
-    #     help.save
-    #   end
+      @service.helps.each do |help|
+        help.chosen = false
+        help.save
+      end
 
-    #   # change this weird logic ASAP
-    #   if @pick
-    #     if @pick.chosen == false
-    #       @pick.chosen = true
-    #       @service.help_id = @pick.id
-    #       @helper.save
-    #       @pick.save
-    #       @service.save
-    #       flash.now[:alert] = "You selected a helper for this service."
-    #     elsif @pick.chosen == true
-    #       @pick.chosen = false
-    #       @helper.timecoin -= 1
-    #       @service.help_id = nil
-    #       @service.helper_id = nil
-    #       @helper.save
-    #       @pick.save
-    #       @service.save
-    #       flash.now[:alert] = "You unselected this Helper."
-    #     end
-    #   end
-    # redirect_to [@service, @help]
+      # change this weird logic ASAP
+      if @pick
+        if @pick.chosen == false
+          @pick.chosen = true
+          @service.help_id = @pick.id
+          @helper.save
+          @pick.save
+          @service.save
+          flash.now[:alert] = "You selected a helper for this service."
+        elsif @pick.chosen == true
+          @pick.chosen = false
+          @helper.timecoin -= 1
+          @service.help_id = nil
+          @service.helper_id = nil
+          @helper.save
+          @pick.save
+          @service.save
+          flash.now[:alert] = "You unselected this Helper."
+        end
+      end
+    redirect_to [@service, @help]
   end
 
   def destroy
