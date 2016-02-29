@@ -11,9 +11,12 @@
 
 <div id="services">
   <% @services.each do |service| %>
+<div style="background: white; padding: 20px">
     <p><h2><%= link_to service.name, service %> created by <b><%= service.servicer_name %></b></h2></p>
     <p><b>created</b> <%= service.created_at %><br>
     <b>description</b> <%= service.description %></p>
+</div>
     <hr>
+
   <% end %>
 </div>
