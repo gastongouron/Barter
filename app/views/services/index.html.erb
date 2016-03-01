@@ -1,50 +1,32 @@
-  <h1>Active services</h1>
-    <ul class="actions">
-      <li>
+<br>
+<div class="panel-console">
         <% if current_user && current_user.timecoin >= 1 %>
-        <%= link_to "New Service", new_service_path, class: "new" %>
+        <%= link_to "New Service", new_service_path, class: "new pull-right" %>
         <% end %>
-      </li>
-    </ul>
 
+<p>Hello</p>
+</div>
 
 <div id="services">
   <% @activeservices.each do |service| %>
-<!--     <div class="panel-service-active"> -->
     <%= link_to service do %>
-
-    <div class="panel-service-active row">
-
-    <div class="col-md-2">
+    <div class="panel-service-active">
       <% prop = User.find_by(id: service.servicer_id) %>
-<%= image_tag(prop.avatar.url(:medium), class: 'round-image-100') %>
+<%= image_tag(prop.avatar.url(:medium), class: 'round-image-50') %>&nbsp;&nbsp;
 
-    </div>
-
-    <div class="col-md-10">
 
     <span class="h3 main-color"><%= service.name %></span><br><br>
     <span>Created by <b><%= service.servicer_name %></b></span>
     <span>at <b> <%= service.created_at %></b></span><br>
-    <span>Starts <b> <%= service.start %></b></span><br>
+    <span>Starts <b> <%= service.start %></b></span>
     <span>Ends <b> <%= service.end %></b></span><br>
 
     <span>description<b> <%= service.description %></b></span>
 
-    </div>
     </div><br>
     <% end %>
   <% end %>
 </div>
-
-  <h1>Archived services</h1>
-    <ul class="actions">
-      <li>
-        <% if current_user && current_user.timecoin >= 1 %>
-        <%= link_to "New Service", new_service_path, class: "new" %>
-        <% end %>
-      </li>
-    </ul>
 
 
 <div id="services">

@@ -1,9 +1,50 @@
 <%= simple_form_for(service) do |f| %>
 
-  <%= f.input :name %>
-  <%= f.input :description %>
-  <%= f.input :location %>
+  <%= f.input :name,        label: 'What do you need help for?',
+                            error: 'A label is mandatory for your service',
+                            placeholder: 'I need your help!' %>
+
+  <%= f.input :description, label: 'What does it consists in?',
+                            error: 'Your service must have a description',
+                            placeholder: 'Your description here' %>
+
+  <div class="row">
+  <div class="col-md-3">
+  <%= f.input :strengh,
+  label: false,
+  prompt:'Intellectual / Physical',
+  collection: [ "Physical", "Intellectual" ] %>
+  </div>
+  <div class="col-md-3">
+  <%= f.input :place,
+  label: false,
+  prompt:'Inside / Outside',
+  collection: [ "Inside", "Outside" ]%>
+  </div>
+
+  <div class="col-md-3">
+  <%= f.input :geography,
+  label: false,
+  collection: [ "Remote", "On-site" ],
+  prompt: "Remote / On-site" %>
+
+  </div>
+
+  <div class="col-md-3">
+  <%= f.input :difficulty,
+  label: false,
+  collection: [ "Require technical skills", "Require no technical skills" ],
+  prompt: "Simple / Technical" %>
+
+  </div>
+  </div>
+
+  <%= f.input :location,
+  label: 'Service location',
+  placeholder: '1337, Acme Street, California',
+  hint:  'Address must be valid. No special characters.' %>
   <%= f.input :start %>
+
 
   <%= f.button :submit, class: 'btn-default' %>
 

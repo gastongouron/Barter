@@ -8,26 +8,16 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "services";
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:400,200,300,500,900,700,600);
 
-$mustard-yellow: #b09133;
-$light-yellow: #fef5da;
-$dark-yellow: #64531d;
-$very-light-yellow: #fefaec;
+$mustard-yellow: violet;
+$light-yellow: rose;
+$dark-yellow: black;
+$very-light-yellow: #f1F1F1;
+
 
 .main-color {
   color: $dark-yellow;
-}
-
-.btn-default, a.new {
-    color: white;
-    background-color: $dark-yellow;
-    border-color: $dark-yellow;
-}
-
-.btn-default:hover, a.new:hover {
-    color: $light-yellow;
-    background-color: $dark-yellow;
-    border-color: $dark-yellow;
 }
 
 .round-image-50 {
@@ -68,6 +58,13 @@ $very-light-yellow: #fefaec;
   padding: 20px;
 }
 
+.panel-console {
+  background: white;
+  padding: 20px;
+  margin: 0px;
+  margin-bottom: 20px;
+}
+
 .panel-service {
   background: white;
   padding: 20px;
@@ -80,9 +77,9 @@ $very-light-yellow: #fefaec;
 }
 
 .panel-helps {
-  background: #fefaec;
+  background: white;
   padding: 20px;
-  margin-top: 0px !important;
+  margin-top: 20px;
 }
 
 .mustard {
@@ -90,7 +87,8 @@ $very-light-yellow: #fefaec;
 }
 
 body {
-  background: $light-yellow;
+  font-family: 'Source Code Pro';
+  background: #F1F1F1;
   color: #32290e;
 }
 
@@ -104,39 +102,39 @@ a:hover {
   text-decoration: none;
 }
 
-.navbar, .nav {
-  background-color: $mustard-yellow;
-  border: 0px;
-  color: $light-yellow;
-}
+// .navbar, .nav {
+//   background-color: $mustard-yellow;
+//   border: 0px;
+//   color: $light-yellow;
+// }
 
-.navbar-default .navbar-nav > li > a {
-    color: $light-yellow;
-}
+// .navbar-default .navbar-nav > li > a {
+//     color: $light-yellow;
+// }
 
-.navbar-default .navbar-nav > li > a:hover {
-    color: white;
-}
+// .navbar-default .navbar-nav > li > a:hover {
+//     color: white;
+// }
 
-.navbar-default .navbar-brand {
-    color: $light-yellow;
-    font-weight: bold;
-    font-size: 27px
-}
-.navbar-default .navbar-brand:hover {
-    color: white;
-    font-weight: bold;
-}
+// .navbar-default .navbar-brand {
+//     color: $light-yellow;
+//     font-weight: bold;
+//     font-size: 27px
+// }
+// .navbar-default .navbar-brand:hover {
+//     color: white;
+//     font-weight: bold;
+// }
 
-.navbar-default .navbar-nav > .active > a {
-  background: $mustard-yellow;
-  color: white;
-}
+// .navbar-default .navbar-nav > .active > a {
+//   background: $mustard-yellow;
+//   color: white;
+// }
 
-.navbar-default .navbar-nav > .active > a:hover {
-  background: $mustard-yellow;
-  color: white;
-}
+// .navbar-default .navbar-nav > .active > a:hover {
+//   background: $mustard-yellow;
+//   color: white;
+// }
 
 header {
   @extend .page-header;
@@ -163,7 +161,7 @@ a.new, a.edit, a.delete {
 }
 
 a.new {
-  @extend .btn-success;
+  @extend .btn-default;
 
   &:before {
     @extend .fa-plus;
@@ -171,22 +169,21 @@ a.new {
 }
 
 .select {
-  @extend .btn;
-  @extend .btn-default;
-  padding-right: 0.5em;
-  display: inline-block;
-  margin-bottom: 0;
-  font-weight: normal;
-  text-align: center;
-  vertical-align: middle;
+  //@extend .btn;
+  //@extend .btn-default;
+  // padding-right: 0.5em;
+  // display: inline-block;
+  // margin-bottom: 0;
+  // font-weight: normal;
+  // text-align: center;
+  // vertical-align: middle;
+}
 
-  &:before {
-    font-family: "FontAwesome";
-  }
+.console {
+  #padding:10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 
-  &:before {
-    @extend .fa-plus;
-  }
 }
 
 a.edit {
@@ -205,11 +202,22 @@ a.delete {
   }
 }
 
+.crazybold {
+  font-size: 24px;
+  font-weight: 200;
+  letter-spacing: 0.5
+}
+
+b {
+  font-weight: 500;
+}
+
 .alert-notice {
   z-index: 10;
-  margin-top: 20px;
   @extend .alert-success;
   background-color: white;
+  border: 0px;
+  margin-bottom: 0px;
 }
 
 .alert-alert {
@@ -217,12 +225,14 @@ a.delete {
   margin-top: 20px;
   @extend .alert-danger;
   background-color: white;
-
+  margin-bottom: 0px;
 }
 
 form {
   max-width: 100%;
 }
+
+
 
 body {
   padding-top: 50px;
@@ -248,4 +258,9 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 }
 .gmnoprint div {
     background:none !important;
+}
+
+.full {
+  height:100%;
+  width:100%;
 }

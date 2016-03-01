@@ -1,7 +1,8 @@
 <% if current_user.timecoin >= 1 %>
-<header><h1>New Service</h1></header>
-<%= render "form", service: @service %>
+  <header><h1>New Service</h1></header>
+  <%= render "form", service: @service %>
 <% else %>
-<header><h3>Sorry! You need a timecoin to create a new service</h3></header>
-<p>To obtain a timecoin, you have to help another person by giving one hour of your time. <br>Then, you'll be credited a timecoin allowing you to create a new service.<br><a href="/services">See current services</a></p>
+  <header><h3>Sorry! You need a timecoin to create a new service</h3></header>
+
+  <p>To obtain a timecoin, you have to help another person by giving one hour of your time. <br>Then, you'll be credited a timecoin allowing you to create a new service.<br><a href="/services">See current services</a></p>
 <% end %>

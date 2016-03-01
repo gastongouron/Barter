@@ -1,8 +1,9 @@
-<%= form_for @user do |f| %>
+<%= simple_form_for @user do |f| %>
+
   <% if @user.errors.any? %>
    <div id="error_explanation">
-     <h2><%= pluralize(@user.errors.count, "error") %>
-       prohibited this user from being saved:</h2>
+     <p><%= pluralize(@user.errors.count, "error") %>
+       prohibited this user from being saved:</p>
      <ul>
      <% @user.errors.full_messages.each do |msg| %>
        <li><%= msg %></li>
@@ -10,34 +11,17 @@
      </ul>
    </div>
   <% end %>
-  <p>
-    <%= f.label :name, "Username" %><br>
-    <%= f.text_field :name %>
-  </p>
 
-  <p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </p>
-
-  <p>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
-  </p>
-
-  <p>
-    <%= f.label :avatar, class: '' %>
-    <%= f.file_field :avatar %>
-  </p>
+    <%= f.input :name %>
+    <%= f.input :email %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+    <%= f.input :avatar, class:'btn-default' %>
 
 
   <% if @user.new_record? %>
-    <%= f.submit "Sign up" %>
+    <%= f.button :submit, class:'btn-default' %>
   <% else %>
-    <%= f.submit "Update Profile" %>
+    <%= f.button :submit, class:'btn-default' %>
   <% end %>
 <% end %>

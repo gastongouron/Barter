@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20160229154712) do
 
   create_table "services", force: :cascade do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description"
     t.string   "location"
     t.string   "servicer_name"
     t.integer  "servicer_id"
@@ -49,21 +49,24 @@ ActiveRecord::Schema.define(version: 20160229154712) do
     t.integer  "help_id"
     t.datetime "start"
     t.datetime "end"
-    t.boolean  "credited",                      default: false
+    t.boolean  "credited",      default: false
+    t.text     "strengh"
+    t.text     "place"
+    t.text     "geography"
+    t.text     "difficulty"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.boolean  "archived",                      default: false
+    t.boolean  "archived",      default: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.boolean  "admin",                           default: false
-    t.integer  "timecoin",                        default: 1
-
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "admin",               default: false
+    t.integer  "timecoin",            default: 1
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"

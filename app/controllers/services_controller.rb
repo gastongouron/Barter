@@ -84,6 +84,7 @@ before_action :set_service, only: [:show, :edit, :update, :destroy]
           flash.now[:alert] = "You unselected this Helper."
         end
       end
+    flash.now[:alert] = "Service has been updated."
     redirect_to [@service, @help]
   end
 
@@ -108,7 +109,11 @@ private
       :servicer_id,
       :help_id,
       :archived,
-      :credited
+      :credited,
+      :strengh,
+      :place,
+      :geography,
+      :difficulty
     )
   end
 

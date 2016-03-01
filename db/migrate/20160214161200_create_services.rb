@@ -2,7 +2,7 @@ class CreateServices < ActiveRecord::Migration
   def change
     create_table  :services do |t|
       t.string    :name
-      t.string    :description
+      t.text      :description
       t.string    :location
       t.string    :servicer_name
       t.integer   :servicer_id
@@ -11,6 +11,12 @@ class CreateServices < ActiveRecord::Migration
       t.datetime  :start
       t.datetime  :end
       t.boolean   :credited, default: false
+
+      t.text    :strengh
+      t.text    :place
+      t.text    :geography
+      t.text    :difficulty
+
 
       t.timestamps null: false
     end
