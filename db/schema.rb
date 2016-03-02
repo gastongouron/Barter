@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20160229154712) do
   create_table "services", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.string   "location"
+    t.string   "location",      default: "Paris"
     t.string   "servicer_name"
     t.integer  "servicer_id"
     t.integer  "helper_id"
@@ -50,12 +50,12 @@ ActiveRecord::Schema.define(version: 20160229154712) do
     t.datetime "start"
     t.datetime "end"
     t.boolean  "credited",      default: false
-    t.text     "strengh"
-    t.text     "place"
-    t.text     "geography"
-    t.text     "difficulty"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.string   "strengh",       default: "Physical"
+    t.string   "place",         default: "Outside"
+    t.string   "geography",     default: "On-site"
+    t.string   "difficulty",    default: "Require no technical skills"
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.boolean  "archived",      default: false
   end
 

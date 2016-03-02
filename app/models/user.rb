@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates :timecoin, :numericality => { :greater_than_or_equal_to => 0 }
   #validates :password, length: {minimum: 6, maximum: 150}, allow_blank: false
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#", :mini => "40x40#" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
 

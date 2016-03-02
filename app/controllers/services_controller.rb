@@ -34,6 +34,8 @@ before_action :set_service, only: [:show, :edit, :update, :destroy]
   end
 
   def show
+    @service = Service.find_by(id: params[:id])
+    p @servicer = User.find_by(id: @service.servicer_id)
     a = Geocoder.search(@service.location)
     ll = a[0].data["geometry"]["location"]
     @lat = ll['lat']

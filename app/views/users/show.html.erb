@@ -1,13 +1,17 @@
-<h1><%= @user.name %></h1>
+<br>
+<div class="panel-console">
+<span class="h1">
+<%= image_tag(current_user.avatar.url(:thumb), class: 'round-image-50') %>
+  <%= @user.name %>
+</span>
+<hr>
 
   <p><b>Email </b><%= @user.email %></p>
   <p><b>Timecoins </b><%= @user.timecoin %></p>
   <p><b>Admin </b><%= @user.admin %></p>
-
-<%= image_tag(current_user.avatar.url(:thumb), class: 'round-image-50') %>
-
- <%= link_to "Edit Profile", edit_user_path %>
 <hr>
+ <%= link_to "Edit Profile", edit_user_path %>
+</div>
 
 <div class="row">
 

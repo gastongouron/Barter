@@ -237,10 +237,10 @@ handler.buildMap({
   "lat": <%= @lat %>,
   "lng": <%= @lng %>,
     "picture": {
-     "url": "http://icons.iconarchive.com/icons/glyphish/glyphish/32/59-flag-icon.png",
-     "width":  32,
-     "height": 32
-        },
+     "url": "<%= @servicer.avatar.url(:mini) %>",
+     "width":  100,
+     "height": 100,
+      },
     }
   ]);
   handler.bounds.extendWith(markers);

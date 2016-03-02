@@ -3,7 +3,7 @@ class CreateServices < ActiveRecord::Migration
     create_table  :services do |t|
       t.string    :name
       t.text      :description
-      t.string    :location
+      t.string    :location,  default: 'Paris'
       t.string    :servicer_name
       t.integer   :servicer_id
       t.integer   :helper_id
@@ -12,11 +12,10 @@ class CreateServices < ActiveRecord::Migration
       t.datetime  :end
       t.boolean   :credited, default: false
 
-      t.text    :strengh
-      t.text    :place
-      t.text    :geography
-      t.text    :difficulty
-
+      t.string    :strengh,    default: 'Physical'
+      t.string    :place,      default: 'Outside'
+      t.string    :geography,  default: 'On-site'
+      t.string    :difficulty, default: 'Require no technical skills'
 
       t.timestamps null: false
     end
